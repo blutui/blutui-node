@@ -1,11 +1,17 @@
+import fetch from 'jest-fetch-mock'
+import fs from 'fs/promises'
+
 import { Blutui } from './blutui'
 import { NoAccessTokenProvidedException } from './exceptions'
 
 describe('Blutui', () => {
+  beforeEach(() => fetch.resetMocks())
+
   describe('contructor', () => {
     const OLD_ENV = process.env
 
     beforeEach(() => {
+      jest.resetModules()
       process.env = { ...OLD_ENV }
       delete process.env.NODE_ENV
     })
@@ -35,6 +41,18 @@ describe('Blutui', () => {
         const token =
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
         expect(() => new Blutui(token)).not.toThrow()
+      })
+    })
+
+    describe('version', () => {
+      it('matches the version in `package.json`', async () => {
+        const blutui = new Blutui('eyJhbGciOi')
+
+        const packageJson = JSON.parse(
+          await fs.readFile('package.json', 'utf-8')
+        )
+
+        expect(blutui.version).toBe(packageJson.version)
       })
     })
   })
