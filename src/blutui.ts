@@ -11,6 +11,9 @@ export class Blutui {
   readonly baseURL: string
   private readonly client: Client
 
+  /**
+   * Create a new Blutui instance
+   */
   public constructor(
     readonly accessToken?: string,
     readonly options: BlutuiOptions = {}
@@ -38,5 +41,12 @@ export class Blutui {
     //   Authorization: `Bearer ${options.accessToken}`,
     //   'Content-Type': 'application/json',
     // })
+  }
+
+  /**
+   * Get the current Blutui Node SDK version.
+   */
+  get version() {
+    return VERSION
   }
 }
