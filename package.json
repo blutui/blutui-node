@@ -13,9 +13,13 @@
     "type": "git",
     "url": "git://github.com/blutui/blutui-node.git"
   },
+  "bugs": {
+    "url": "https://github.com/blutui/blutui-node/issues"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier \"src/**/*.{js,ts}\" --write"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
