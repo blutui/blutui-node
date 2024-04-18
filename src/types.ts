@@ -9,3 +9,9 @@ export interface GetOptions {
 export interface PostOptions {
   query?: { [key: string]: any }
 }
+
+// Response Error
+
+export interface BlutuiResponseError {
+  message: string
+}

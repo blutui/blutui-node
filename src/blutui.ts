@@ -1,9 +1,19 @@
-import { NoAccessTokenProvidedException } from './exceptions'
+import {
+  GenericServerException,
+  NoAccessTokenProvidedException,
+  UnauthorizedException,
+} from './exceptions'
 import { Client } from './utils/client'
 
+import { FetchException } from './exceptions'
 import { User } from './resources'
 
-import type { BlutuiOptions, GetOptions, PostOptions } from './types'
+import type {
+  BlutuiOptions,
+  BlutuiResponseError,
+  GetOptions,
+  PostOptions,
+} from './types'
 
 const VERSION = '0.1.0'
 
@@ -55,8 +65,12 @@ export class Blutui {
     options: GetOptions = {}
   ): Promise<{ data: Result }> {
     try {
-      return await this.client.get(path, {})
+      return await this.client.get(path, {
+        params: options.query,
+      })
     } catch (error) {
+      this.handleFetchError({ path, error })
+
       throw error
     }
   }
@@ -67,9 +81,30 @@ export class Blutui {
     options: PostOptions = {}
   ): Promise<{ data: Result }> {
     try {
-      return await this.client.post<Entity>(path, entity, {})
+      return await this.client.post<Entity>(path, entity, {
+        params: options.query,
+      })
     } catch (error) {
+      this.handleFetchError({ path, error })
+
       throw error
+    }
+  }
+
+  private handleFetchError({ path, error }: { path: string; error: unknown }) {
+    const { response } = error as FetchException<BlutuiResponseError>
+
+    if (response) {
+      const { status } = response
+
+      switch (status) {
+        case 401: {
+          throw new UnauthorizedException()
+        }
+        default: {
+          throw new GenericServerException()
+        }
+      }
     }
   }
 }

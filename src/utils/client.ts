@@ -1,4 +1,4 @@
-import { FetchException } from '../exceptions/fetch.exception'
+import { FetchException } from '../exceptions'
 
 export class Client {
   constructor(
