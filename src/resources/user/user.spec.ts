@@ -22,6 +22,13 @@ describe('User', () => {
   })
 
   describe('email', () => {
-    it('can get the current users email address', async () => {})
+    it('can get the current users email address', async () => {
+      fetchOnce({ object: 'user_email' })
+      const email = await blutui.user.email()
+      expect(fetchURL()).toContain('/v1/user/email')
+      expect(email).toMatchObject({
+        object: 'user_email',
+      })
+    })
   })
 })
