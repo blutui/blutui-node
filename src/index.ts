@@ -1,1 +1,5 @@
-export { Blutui } from './blutui'
+import { Blutui } from './blutui'
+
+export { Blutui }
+
+export default Blutui
