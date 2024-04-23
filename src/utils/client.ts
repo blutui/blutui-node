@@ -22,7 +22,7 @@ export class Client {
     entity: Entity,
     options: { params?: Record<string, any>; headers?: HeadersInit }
   ) {
-    const resourceURL = ''
+    const resourceURL = this.getResourceURL(path, options.params)
 
     return await this.fetch(resourceURL, {
       method: 'POST',
@@ -43,10 +43,12 @@ export class Client {
 
   private async fetch(url: string, options?: RequestInit) {
     const response = await fetch(url, {
+      ...this.options,
       ...options,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        ...this.options?.headers,
         ...options?.headers,
       },
     })
