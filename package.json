@@ -1,6 +1,6 @@
 {
   "name": "blutui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node.js library for the Blutui API",
   "license": "MIT",
   "keywords": [
@@ -22,7 +22,8 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "test": "jest",
-    "format": "prettier \"src/**/*.{js,ts}\" --write"
+    "format": "prettier \"src/**/*.{js,ts}\" --write",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
