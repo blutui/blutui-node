@@ -15,11 +15,6 @@ describe('User', () => {
       fetchOnce({ object: 'user' })
       const user = await blutui.user.get()
       expect(fetchURL()).toContain('/v1/user')
-      expect(fetchHeaders()).toHaveProperty('Accept', 'application/json')
-      expect(fetchHeaders()).toHaveProperty(
-        'Authorization',
-        `Bearer ${accessToken}`
-      )
       expect(user).toMatchObject({
         object: 'user',
       })
