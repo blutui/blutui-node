@@ -14,3 +14,7 @@ export function fetchOnce(
 export function fetchURL() {
   return fetch.mock.calls[0][0]
 }
+
+export function fetchHeaders() {
+  return fetch.mock.calls[0][1]?.headers
+}
