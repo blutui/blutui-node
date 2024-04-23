@@ -9,6 +9,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/blutui/blutui-node.git"
