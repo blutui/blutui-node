@@ -14,4 +14,5 @@ export interface PostOptions {
 
 export interface BlutuiResponseError {
   message: string
+  type: string
 }

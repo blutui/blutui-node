@@ -14,6 +14,8 @@ import type {
   GetOptions,
   PostOptions,
 } from './types'
+import { Agency } from './agency'
+import { NotFoundException } from './exceptions/not-found.exception'
 
 const VERSION = '0.1.2'
 
@@ -23,6 +25,7 @@ export class Blutui {
   readonly baseURL: string
   private readonly client: Client
 
+  readonly agencies: Record<string, Agency> = {}
   readonly user = new User(this)
 
   /**
@@ -60,6 +63,19 @@ export class Blutui {
     return VERSION
   }
 
+  /**
+   * Get a Blutui Agency instance for the given agency.
+   *
+   * @param username - The agency's username
+   */
+  agency(username: string): Agency {
+    if (!this.agencies[username]) {
+      this.agencies[username] = new Agency(username, this)
+    }
+
+    return this.agencies[username]
+  }
+
   async get<Result = any>(
     path: string,
     options: GetOptions = {}
@@ -95,11 +111,15 @@ export class Blutui {
     const { response } = error as FetchException<BlutuiResponseError>
 
     if (response) {
-      const { status } = response
+      const { status, data } = response
+      const { type, message } = data
 
       switch (status) {
         case 401: {
           throw new UnauthorizedException()
+        }
+        case 404: {
+          throw new NotFoundException({ message, type, path })
         }
         default: {
           throw new GenericServerException()

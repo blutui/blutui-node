@@ -1,8 +1,11 @@
 import fetch from 'jest-fetch-mock'
 import fs from 'fs/promises'
 
+import { Agency } from './agency'
 import { Blutui } from './blutui'
-import { NoAccessTokenProvidedException } from './exceptions'
+import { NoAccessTokenProvidedException, NotFoundException } from './exceptions'
+
+import { fetchOnce } from './utils/testing'
 
 describe('Blutui', () => {
   beforeEach(() => fetch.resetMocks())
@@ -53,6 +56,61 @@ describe('Blutui', () => {
         )
 
         expect(blutui.version).toBe(packageJson.version)
+      })
+    })
+
+    describe('agency', () => {
+      it('can create and get a new agency instance', () => {
+        const blutui = new Blutui('eyJhbGciOi')
+
+        const fooAgency = blutui.agency('foo')
+
+        expect(fooAgency).toBeInstanceOf(Agency)
+        expect(fooAgency.username).toBe('foo')
+      })
+    })
+
+    describe('get', () => {
+      describe('when the API responds with a 404 error', () => {
+        it('throws a NotFoundException', async () => {
+          const message = "The requested resource doesn't exist."
+          const type = 'invalid_request_error'
+          fetchOnce(
+            {
+              message,
+              type,
+            },
+            { status: 404 }
+          )
+
+          const blutui = new Blutui('eyJhbGciOi')
+
+          await expect(blutui.get('/path')).rejects.toStrictEqual(
+            new NotFoundException({ message, type, path: '/path' })
+          )
+        })
+      })
+    })
+
+    describe('post', () => {
+      describe('when the API responds with a 404 error', () => {
+        it('throws a NotFoundException', async () => {
+          const message = "The requested resource doesn't exist."
+          const type = 'invalid_request_error'
+          fetchOnce(
+            {
+              message,
+              type,
+            },
+            { status: 404 }
+          )
+
+          const blutui = new Blutui('eyJhbGciOi')
+
+          await expect(blutui.post('/path', {})).rejects.toStrictEqual(
+            new NotFoundException({ message, type, path: '/path' })
+          )
+        })
       })
     })
   })

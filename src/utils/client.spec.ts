@@ -10,21 +10,23 @@ const blutui = new Blutui(accessToken)
 describe('Client', () => {
   beforeEach(() => fetch.resetMocks())
 
-  it('get should always include proper header', async () => {
-    await blutui.get('v1/any')
-    expect(fetchURL()).toContain('/v1/any')
-    expect(fetchHeaders()).toHaveProperty(
-      'Authorization',
-      `Bearer ${accessToken}`
-    )
-  })
+  describe('fetch', () => {
+    it('get should always include proper header', async () => {
+      await blutui.get('v1/any')
+      expect(fetchURL()).toContain('/v1/any')
+      expect(fetchHeaders()).toHaveProperty(
+        'Authorization',
+        `Bearer ${accessToken}`
+      )
+    })
 
-  it('post should always include proper header', async () => {
-    await blutui.post('v1/any', {})
-    expect(fetchURL()).toContain('/v1/any')
-    expect(fetchHeaders()).toHaveProperty(
-      'Authorization',
-      `Bearer ${accessToken}`
-    )
+    it('post should always include proper header', async () => {
+      await blutui.post('v1/any', {})
+      expect(fetchURL()).toContain('/v1/any')
+      expect(fetchHeaders()).toHaveProperty(
+        'Authorization',
+        `Bearer ${accessToken}`
+      )
+    })
   })
 })
