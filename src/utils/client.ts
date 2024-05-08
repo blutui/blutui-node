@@ -31,6 +31,32 @@ export class Client {
     })
   }
 
+  async patch<Entity = any>(
+    path: string,
+    entity: Entity,
+    options: { params?: Record<string, any>; headers?: HeadersInit }
+  ) {
+    const resourceURL = this.getResourceURL(path, options.params)
+
+    return await this.fetch(resourceURL, {
+      method: 'PATCH',
+      headers: options.headers,
+      body: getBody(entity),
+    })
+  }
+
+  async delete(
+    path: string,
+    options: { params?: Record<string, any>; headers?: HeadersInit }
+  ) {
+    const resourceURL = this.getResourceURL(path, options.params)
+
+    return await this.fetch(resourceURL, {
+      method: 'DELETE',
+      headers: options.headers,
+    })
+  }
+
   private getResourceURL(path: string, params?: Record<string, any>) {
     const queryString = params
     const url = new URL(

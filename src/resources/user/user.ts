@@ -1,4 +1,4 @@
-import { Blutui } from '../../blutui'
+import { Blutui } from '@/blutui'
 
 import { deserializeUser, deserializeUserEmail } from './serializers'
 

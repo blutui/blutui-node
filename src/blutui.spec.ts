@@ -63,10 +63,10 @@ describe('Blutui', () => {
       it('can create and get a new agency instance', () => {
         const blutui = new Blutui('eyJhbGciOi')
 
-        const fooAgency = blutui.agency('foo')
+        const agency = blutui.agency('foo')
 
-        expect(fooAgency).toBeInstanceOf(Agency)
-        expect(fooAgency.username).toBe('foo')
+        expect(agency).toBeInstanceOf(Agency)
+        expect(agency.username).toBe('foo')
       })
     })
 

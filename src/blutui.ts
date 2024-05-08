@@ -1,21 +1,23 @@
+import { Agency } from './agency'
 import {
+  FetchException,
   GenericServerException,
   NoAccessTokenProvidedException,
+  NotFoundException,
   UnauthorizedException,
 } from './exceptions'
 import { Client } from './utils/client'
 
-import { FetchException } from './exceptions'
 import { User } from './resources'
 
 import type {
   BlutuiOptions,
   BlutuiResponseError,
+  DeleteOptions,
   GetOptions,
+  PatchOptions,
   PostOptions,
 } from './types'
-import { Agency } from './agency'
-import { NotFoundException } from './exceptions/not-found.exception'
 
 const VERSION = '0.1.2'
 
@@ -98,6 +100,37 @@ export class Blutui {
   ): Promise<{ data: Result }> {
     try {
       return await this.client.post<Entity>(path, entity, {
+        params: options.query,
+      })
+    } catch (error) {
+      this.handleFetchError({ path, error })
+
+      throw error
+    }
+  }
+
+  async patch<Result = any, Entity = any>(
+    path: string,
+    entity: Entity,
+    options: PatchOptions = {}
+  ): Promise<{ data: Result }> {
+    try {
+      return this.client.patch<Entity>(path, entity, {
+        params: options.query,
+      })
+    } catch (error) {
+      this.handleFetchError({ path, error })
+
+      throw error
+    }
+  }
+
+  async delete<Result = any>(
+    path: string,
+    options: DeleteOptions = {}
+  ): Promise<{ data: Result }> {
+    try {
+      return await this.client.delete(path, {
         params: options.query,
       })
     } catch (error) {
