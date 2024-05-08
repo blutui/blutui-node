@@ -16,12 +16,20 @@ import { serializeUpdateBrandOptions } from './serializers/update-brand-options.
 export class Brand {
   constructor(private readonly agency: Agency) {}
 
+  /**
+   * Get the brand for the current agency.
+   */
   async get(): Promise<BrandI> {
     const { data } = await this.agency.get<BrandResponse>('/brand')
 
     return deserializeBrand(data)
   }
 
+  /**
+   * Create a new brand for the current agency.
+   *
+   * @param payload - The values to create the brand
+   */
   async create(payload: CreateBrandOptions): Promise<BrandI> {
     const { data } = await this.agency.post<
       BrandResponse,
@@ -31,6 +39,11 @@ export class Brand {
     return deserializeBrand(data)
   }
 
+  /**
+   * Update the brand for the current agency.
+   *
+   * @param payload - The values to update the brand
+   */
   async update(payload: UpdateBrandOptions): Promise<BrandI> {
     const { data } = await this.agency.patch<
       BrandResponse,
@@ -40,6 +53,9 @@ export class Brand {
     return deserializeBrand(data)
   }
 
+  /**
+   * Remove the brand for the current agency.
+   */
   async remove(): Promise<DeletedResponse> {
     const { data } = await this.agency.delete<DeletedResponse>('/brand')
 
