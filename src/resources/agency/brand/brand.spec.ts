@@ -24,7 +24,13 @@ describe('Brand', () => {
 
   describe('create', () => {
     it('can create a new agency brand', async () => {
-      fetchOnce({ object: 'brand' })
+      fetchOnce({
+        id: '9bfdb42b-1bf0-4510-978e-46aa329f8efa',
+        object: 'brand',
+        logo: null,
+        primary_color: '#000000',
+        secondary_color: '#222222',
+      })
       const brand = await blutui.agency('foo').brand.create({
         primaryColor: '#000000',
         secondaryColor: '#222222',
@@ -32,7 +38,11 @@ describe('Brand', () => {
 
       expect(fetchURL()).toContain('/v1/agencies/foo/brand')
       expect(brand).toMatchObject({
+        id: '9bfdb42b-1bf0-4510-978e-46aa329f8efa',
         object: 'brand',
+        logo: null,
+        primaryColor: '#000000',
+        secondaryColor: '#222222',
       })
     })
   })

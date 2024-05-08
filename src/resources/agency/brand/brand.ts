@@ -7,8 +7,11 @@ import {
   BrandResponse,
   CreateBrandOptions,
   SerializedCreateBrandOptions,
+  SerializedUpdateBrandOptions,
+  UpdateBrandOptions,
   type Brand as BrandI,
 } from './interfaces'
+import { serializeUpdateBrandOptions } from './serializers/update-brand-options.serializer'
 
 export class Brand {
   constructor(private readonly agency: Agency) {}
@@ -28,8 +31,11 @@ export class Brand {
     return deserializeBrand(data)
   }
 
-  async update(payload: {}): Promise<BrandI> {
-    const { data } = await this.agency.patch<BrandResponse>('/brand', payload)
+  async update(payload: UpdateBrandOptions): Promise<BrandI> {
+    const { data } = await this.agency.patch<
+      BrandResponse,
+      SerializedUpdateBrandOptions
+    >('/brand', serializeUpdateBrandOptions(payload))
 
     return deserializeBrand(data)
   }
