@@ -5,6 +5,7 @@ import {
   NoAccessTokenProvidedException,
   NotFoundException,
   UnauthorizedException,
+  ValidationException,
 } from './exceptions'
 import { Client } from './utils/client'
 
@@ -148,6 +149,9 @@ export class Blutui {
       const { type, message } = data
 
       switch (status) {
+        case 422: {
+          throw new ValidationException({ message, type })
+        }
         case 401: {
           throw new UnauthorizedException()
         }
@@ -155,6 +159,7 @@ export class Blutui {
           throw new NotFoundException({ message, type, path })
         }
         default: {
+          console.error('Unhandled error:', data, status)
           throw new GenericServerException()
         }
       }
