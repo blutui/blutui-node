@@ -1,5 +1,7 @@
 import { FetchException } from '../exceptions'
 
+const API_VERSION = 'v1'
+
 export class Client {
   constructor(
     readonly baseURL: string,
@@ -59,11 +61,11 @@ export class Client {
 
   private getResourceURL(path: string, params?: Record<string, any>) {
     const queryString = params
+    const pathWithVersion = API_VERSION + path
     const url = new URL(
-      [path, queryString].filter(Boolean).join('?'),
+      [pathWithVersion, queryString].filter(Boolean).join('?'),
       this.baseURL
     )
-
     return url.toString()
   }
 

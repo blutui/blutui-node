@@ -1,5 +1,3 @@
-import { Agency } from '@/agency'
-
 import { deserializeBrand, serializeCreateBrandOptions } from './serializers'
 
 import { DeletedResponse } from '@/types'
@@ -12,15 +10,14 @@ import {
   type Brand as BrandI,
 } from './interfaces'
 import { serializeUpdateBrandOptions } from './serializers/update-brand-options.serializer'
+import { AgencyResource } from '..'
 
-export class Brand {
-  constructor(private readonly agency: Agency) {}
-
+export class Brand extends AgencyResource {
   /**
    * Get the brand for the current agency.
    */
   async get(): Promise<BrandI> {
-    const { data } = await this.agency.get<BrandResponse>('/brand')
+    const { data } = await this.blutui.get<BrandResponse>(this.path('brand'))
 
     return deserializeBrand(data)
   }
@@ -31,10 +28,10 @@ export class Brand {
    * @param payload - The values to create the brand
    */
   async create(payload: CreateBrandOptions): Promise<BrandI> {
-    const { data } = await this.agency.post<
+    const { data } = await this.blutui.post<
       BrandResponse,
       SerializedCreateBrandOptions
-    >('/brand', serializeCreateBrandOptions(payload))
+    >(this.path('brand'), serializeCreateBrandOptions(payload))
 
     return deserializeBrand(data)
   }
@@ -45,10 +42,10 @@ export class Brand {
    * @param payload - The values to update the brand
    */
   async update(payload: UpdateBrandOptions): Promise<BrandI> {
-    const { data } = await this.agency.patch<
+    const { data } = await this.blutui.patch<
       BrandResponse,
       SerializedUpdateBrandOptions
-    >('/brand', serializeUpdateBrandOptions(payload))
+    >(this.path('brand'), serializeUpdateBrandOptions(payload))
 
     return deserializeBrand(data)
   }
@@ -57,7 +54,9 @@ export class Brand {
    * Remove the brand for the current agency.
    */
   async remove(): Promise<DeletedResponse> {
-    const { data } = await this.agency.delete<DeletedResponse>('/brand')
+    const { data } = await this.blutui.delete<DeletedResponse>(
+      this.path('brand')
+    )
 
     return data
   }
