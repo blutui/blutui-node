@@ -62,15 +62,15 @@ export class Client {
     const queryString = params
 
     const url = new URL(
-      [this.versionPath(path), queryString].filter(Boolean).join('?'),
+      [this.pathUsingVersion(path), queryString].filter(Boolean).join('?'),
       this.baseURL
     )
     return url.toString()
   }
 
-  private versionPath(path: string) {
+  private pathUsingVersion(path: string, version: string = API_VERSION) {
     path = path.startsWith('/') ? path.replace('/', '') : path
-    return API_VERSION + '/' + path
+    return version + '/' + path
   }
 
   private async fetch(url: string, options?: RequestInit) {
