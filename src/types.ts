@@ -32,3 +32,9 @@ export interface BlutuiResponseError {
   message: string
   type: string
 }
+
+// Response Message
+
+export interface BlutuiResponseMessage {
+  message: string
+}

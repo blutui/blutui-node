@@ -1,6 +1,6 @@
 import { deserializeBrand, serializeCreateBrandOptions } from './serializers'
 
-import { DeletedResponse } from '@/types'
+import { BlutuiResponseMessage, DeletedResponse } from '@/types'
 import {
   BrandResponse,
   CreateBrandOptions,
@@ -13,13 +13,17 @@ import { serializeUpdateBrandOptions } from './serializers/update-brand-options.
 import { AgencyResource } from '..'
 
 export class Brand extends AgencyResource {
+  private noContent: BlutuiResponseMessage = {
+    message: 'No brand found for this agency.',
+  }
+
   /**
    * Get the brand for the current agency.
    */
-  async get(): Promise<BrandI> {
+  async get(): Promise<BrandI | BlutuiResponseMessage> {
     const { data } = await this.blutui.get<BrandResponse>(this.path('brand'))
 
-    return deserializeBrand(data)
+    return data ? deserializeBrand(data) : this.noContent
   }
 
   /**

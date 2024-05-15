@@ -1,5 +1,5 @@
 export class ValidationException extends Error {
-  readonly status = 204
+  readonly status = 422
   readonly name = 'ValidationException'
   readonly message: string
   readonly type?: string
