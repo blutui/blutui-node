@@ -13,7 +13,6 @@ export class Client {
     options: { params?: Record<string, any>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
-
     return await this.fetch(resourceURL, {
       headers: options.headers,
     })
@@ -61,12 +60,17 @@ export class Client {
 
   private getResourceURL(path: string, params?: Record<string, any>) {
     const queryString = params
-    const pathWithVersion = API_VERSION + path
+
     const url = new URL(
-      [pathWithVersion, queryString].filter(Boolean).join('?'),
+      [this.versionPath(path), queryString].filter(Boolean).join('?'),
       this.baseURL
     )
     return url.toString()
+  }
+
+  private versionPath(path: string) {
+    path = path.startsWith('/') ? path.replace('/', '') : path
+    return API_VERSION + '/' + path
   }
 
   private async fetch(url: string, options?: RequestInit) {
