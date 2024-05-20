@@ -28,8 +28,8 @@ const DEFAULT_HOSTNAME = 'api.blutui.com'
 export class Blutui {
   readonly baseURL: string
   private readonly client: Client
+  private readonly _agencies: Record<string, Agency> = {}
 
-  readonly agencies: Record<string, Agency> = {}
   readonly user = new User(this)
 
   /**
@@ -73,11 +73,11 @@ export class Blutui {
    * @param username - The agency's username
    */
   agency(username: string): Agency {
-    if (!this.agencies[username]) {
-      this.agencies[username] = new Agency(username, this)
+    if (!this._agencies[username]) {
+      this._agencies[username] = new Agency(username, this)
     }
 
-    return this.agencies[username]
+    return this._agencies[username]
   }
 
   async get<Result = any>(
