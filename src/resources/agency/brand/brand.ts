@@ -1,7 +1,5 @@
 import { Agency } from '@/agency'
-
 import { deserializeBrand, serializeCreateBrandOptions } from './serializers'
-
 import { DeletedResponse } from '@/types'
 import {
   BrandResponse,
@@ -19,10 +17,10 @@ export class Brand {
   /**
    * Get the brand for the current agency.
    */
-  async get(): Promise<BrandI> {
-    const { data } = await this.agency.get<BrandResponse>('/brand')
+  async get(): Promise<BrandI | null> {
+    const { data } = await this.agency.get<BrandResponse>('brand')
 
-    return deserializeBrand(data)
+    return data ? deserializeBrand(data) : null
   }
 
   /**
@@ -34,7 +32,7 @@ export class Brand {
     const { data } = await this.agency.post<
       BrandResponse,
       SerializedCreateBrandOptions
-    >('/brand', serializeCreateBrandOptions(payload))
+    >('brand', serializeCreateBrandOptions(payload))
 
     return deserializeBrand(data)
   }
@@ -48,7 +46,7 @@ export class Brand {
     const { data } = await this.agency.patch<
       BrandResponse,
       SerializedUpdateBrandOptions
-    >('/brand', serializeUpdateBrandOptions(payload))
+    >('brand', serializeUpdateBrandOptions(payload))
 
     return deserializeBrand(data)
   }
@@ -57,7 +55,7 @@ export class Brand {
    * Remove the brand for the current agency.
    */
   async remove(): Promise<DeletedResponse> {
-    const { data } = await this.agency.delete<DeletedResponse>('/brand')
+    const { data } = await this.agency.delete<DeletedResponse>('brand')
 
     return data
   }

@@ -5,6 +5,8 @@ import {
   NoAccessTokenProvidedException,
   NotFoundException,
   UnauthorizedException,
+  ValidationException,
+  AuthorizationException,
 } from './exceptions'
 import { Client } from './utils/client'
 
@@ -145,11 +147,17 @@ export class Blutui {
 
     if (response) {
       const { status, data } = response
-      const { type, message } = data
+      const { type, message, errors } = data
 
       switch (status) {
         case 401: {
           throw new UnauthorizedException()
+        }
+        case 403: {
+          throw new AuthorizationException({ message, type })
+        }
+        case 422: {
+          throw new ValidationException({ message, type, errors })
         }
         case 404: {
           throw new NotFoundException({ message, type, path })

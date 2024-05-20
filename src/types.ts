@@ -31,4 +31,11 @@ export interface DeletedResponse {
 export interface BlutuiResponseError {
   message: string
   type: string
+  errors?: { [key: string]: string[] }
+}
+
+// Response Message
+
+export interface BlutuiResponseMessage {
+  message: string
 }

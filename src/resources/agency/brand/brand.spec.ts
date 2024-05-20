@@ -12,6 +12,25 @@ const blutui = new Blutui(accessToken)
 describe('Brand', () => {
   beforeEach(() => fetch.resetMocks())
 
+  it('can handle aurhorization error', async () => {
+    fetchOnce({}, { status: 401 })
+
+    await expect(blutui.agency('foo').brand.get()).rejects.toThrow(
+      'The request could not be authorized. Maybe your access token is invalid?'
+    )
+  })
+
+  it('can handle validation error', async () => {
+    fetchOnce({}, { status: 422 })
+
+    await expect(
+      blutui.agency('foo').brand.create({
+        primaryColor: '#NOT_VALID_COLOR',
+        secondaryColor: '#NOT_VALID_COLOR',
+      })
+    ).rejects.toThrow('Validation failed.')
+  })
+
   describe('get', () => {
     it('can get the agency brand', async () => {
       fetchOnce(brandFixture)
@@ -21,6 +40,12 @@ describe('Brand', () => {
       expect(brand).toMatchObject({
         object: 'brand',
       })
+    })
+
+    it('return not found message when the agency do not have brand', async () => {
+      const brand = await blutui.agency('foo').brand.get()
+      expect(fetchURL()).toContain('/v1/agencies/foo/brand')
+      expect(brand).toBeNull()
     })
   })
 
