@@ -16,7 +16,7 @@ export class User {
    * Get the current user.
    */
   async get(): Promise<UserI> {
-    const { data } = await this.blutui.get<UserResponse>('/v1/user')
+    const { data } = await this.blutui.get<UserResponse>('user')
 
     return deserializeUser(data)
   }
@@ -25,7 +25,7 @@ export class User {
    * Get the current user's email address.
    */
   async email(): Promise<UserEmail> {
-    const { data } = await this.blutui.get<UserEmailResponse>('/v1/user/email')
+    const { data } = await this.blutui.get<UserEmailResponse>('user/email')
 
     return deserializeUserEmail(data)
   }

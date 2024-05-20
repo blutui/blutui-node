@@ -46,6 +46,6 @@ export class Agency {
   private getAgencyPath(path: string): string {
     path = path.startsWith('/') ? path.replace('/', '') : path
 
-    return `/v1/agencies/${this.username}/${path}`
+    return `/agencies/${this.username}/${path}`
   }
 }

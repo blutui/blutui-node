@@ -1,5 +1,7 @@
 import { FetchException } from '../exceptions'
 
+const API_VERSION = 'v1'
+
 export class Client {
   constructor(
     readonly baseURL: string,
@@ -11,7 +13,6 @@ export class Client {
     options: { params?: Record<string, any>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
-
     return await this.fetch(resourceURL, {
       headers: options.headers,
     })
@@ -59,12 +60,17 @@ export class Client {
 
   private getResourceURL(path: string, params?: Record<string, any>) {
     const queryString = params
+
     const url = new URL(
-      [path, queryString].filter(Boolean).join('?'),
+      [this.pathUsingVersion(path), queryString].filter(Boolean).join('?'),
       this.baseURL
     )
-
     return url.toString()
+  }
+
+  private pathUsingVersion(path: string, version: string = API_VERSION) {
+    path = path.startsWith('/') ? path.replace('/', '') : path
+    return version + '/' + path
   }
 
   private async fetch(url: string, options?: RequestInit) {
