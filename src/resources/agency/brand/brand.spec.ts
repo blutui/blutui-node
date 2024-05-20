@@ -15,9 +15,9 @@ describe('Brand', () => {
   it('can handle aurhorization error', async () => {
     fetchOnce({}, { status: 401 })
 
-    await expect(
-      blutui.agency('foo').brand.get()
-    ).rejects.toThrow('The request could not be authorized. Maybe your access token is invalid?')
+    await expect(blutui.agency('foo').brand.get()).rejects.toThrow(
+      'The request could not be authorized. Maybe your access token is invalid?'
+    )
   })
 
   it('can handle validation error', async () => {
@@ -30,7 +30,6 @@ describe('Brand', () => {
       })
     ).rejects.toThrow('Validation failed.')
   })
-
 
   describe('get', () => {
     it('can get the agency brand', async () => {
@@ -46,9 +45,7 @@ describe('Brand', () => {
     it('return not found message when the agency do not have brand', async () => {
       const brand = await blutui.agency('foo').brand.get()
       expect(fetchURL()).toContain('/v1/agencies/foo/brand')
-      expect(brand).toMatchObject({
-        message: 'No brand found for this agency.',
-      })
+      expect(brand).toBeNull()
     })
   })
 
