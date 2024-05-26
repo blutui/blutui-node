@@ -97,13 +97,17 @@ export class Blutui {
 
   async post<Result = any, Entity = any>(
     path: string,
-    entity: Entity,
+    entity?: Entity,
     options: PostOptions = {}
   ): Promise<{ data: Result }> {
     try {
-      return await this.client.post<Entity>(path, entity, {
-        params: options.query,
-      })
+      return await this.client.post<Entity>(
+        path,
+        {
+          params: options.query,
+        },
+        entity
+      )
     } catch (error) {
       this.handleFetchError({ path, error })
 
