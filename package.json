@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "npm run build -- --watch",
     "test": "jest",
     "format": "prettier \"src/**/*.{js,ts}\" --write",
     "prepublishOnly": "npm run build"

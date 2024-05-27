@@ -59,8 +59,7 @@ export class Client {
   }
 
   private getResourceURL(path: string, params?: Record<string, any>) {
-    const queryString = params
-
+    const queryString = getQueryString(params)
     const url = new URL(
       [this.pathUsingVersion(path), queryString].filter(Boolean).join('?'),
       this.baseURL
@@ -105,6 +104,24 @@ export class Client {
 
     return { data: null }
   }
+}
+
+function getQueryString(queryObj?: Record<string, any>) {
+  if (!queryObj) return undefined
+
+  const sanitizedQueryObj: string[][] = []
+
+  Object.entries(queryObj).forEach(([param, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((element) => {
+        if (element !== '' && element !== undefined)
+          sanitizedQueryObj.push([`${param}[]`, element])
+      })
+    } else if (value !== '' && value !== undefined)
+      sanitizedQueryObj.push([param, value])
+  })
+
+  return new URLSearchParams(sanitizedQueryObj).toString()
 }
 
 function getBody(entity: any): BodyInit | null | undefined {
