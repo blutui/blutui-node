@@ -82,7 +82,8 @@ export class Domains {
    */
   async refresh(id: string): Promise<Domain> {
     const { data } = await this.agency.post<DomainResponse>(
-      `domains/${id}/refresh`
+      `domains/${id}/refresh`,
+      {}
     )
 
     return deserializeDomain(data)
@@ -93,9 +94,9 @@ export class Domains {
    */
   async verify(id: string): Promise<DomainVerifyResponse> {
     const { data } = await this.agency.post<DomainVerifyResponse>(
-      `domains/${id}/verify`
+      `domains/${id}/verify`,
+      {}
     )
-
     return data
   }
 
