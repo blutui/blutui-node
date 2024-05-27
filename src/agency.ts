@@ -18,7 +18,7 @@ export class Agency {
 
   async post<Result = any, Entity = any>(
     path: string,
-    entity?: Entity,
+    entity: Entity,
     options: PostOptions = {}
   ) {
     return this.blutui.post<Result, Entity>(
