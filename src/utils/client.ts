@@ -20,8 +20,8 @@ export class Client {
 
   async post<Entity = any>(
     path: string,
-    options: { params?: Record<string, any>; headers?: HeadersInit },
-    entity: Entity
+    entity: Entity,
+    options: { params?: Record<string, any>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
 
