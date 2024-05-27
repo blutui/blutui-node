@@ -97,7 +97,7 @@ export class Blutui {
 
   async post<Result = any, Entity = any>(
     path: string,
-    entity?: Entity,
+    entity: Entity,
     options: PostOptions = {}
   ): Promise<{ data: Result }> {
     try {
