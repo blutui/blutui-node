@@ -1,11 +1,12 @@
 import { Blutui } from './blutui'
 
-import { Brand, Domains } from './resources/agency'
+import { Brand, Domains, Projects } from './resources/agency'
 import type { GetOptions, PostOptions } from './types'
 
 export class Agency {
   readonly brand = new Brand(this)
   readonly domains = new Domains(this)
+  readonly projects = new Projects(this)
 
   constructor(
     public username: string,

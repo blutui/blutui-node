@@ -1,5 +1,5 @@
 import { Agency } from '@/agency'
-import {
+import type {
   CreateDomainOptions,
   DomainResponse,
   DomainVerifyResponse,
@@ -7,7 +7,7 @@ import {
   SerializedCreateDomainOptions,
   SerializedUpdateDomainOptions,
   UpdateDomainOptions,
-  type Domain,
+  Domain,
 } from './interfaces'
 import {
   deserializeDomain,
