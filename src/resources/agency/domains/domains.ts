@@ -15,7 +15,13 @@ import {
   serializeCreateDomainOptions,
   serializeUpdateDomainOptions,
 } from './serializers'
-import { DeletedResponse, List, ListResponse, PaginationOptions } from '@/types'
+import {
+  DeletedResponse,
+  Expandable,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
 
 export class Domains {
   constructor(private readonly agency: Agency) {}
@@ -23,18 +29,19 @@ export class Domains {
   /**
    * Get the domains list for the current agency.
    */
-  async list(paginationOptions?: PaginationOptions): Promise<List<Domain>> {
+  async list(options?: PaginationOptions): Promise<List<Domain>> {
     const { data } = await this.agency.get<ListResponse<DomainResponse>>(
       'domains',
-      { query: paginationOptions }
+      { query: options }
     )
+
     return deserializeDomainList(data)
   }
 
   /**
    * Get a domain information by id.
    */
-  async get(id: string, options?: { expand: string[] }): Promise<Domain> {
+  async get(id: string, options?: Expandable<'project'>): Promise<Domain> {
     const { data } = await this.agency.get<DomainResponse>(`domains/${id}`, {
       query: options,
     })

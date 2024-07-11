@@ -41,6 +41,10 @@ export interface PaginationOptions {
   page?: number
 }
 
+// Expand resources
+
+export type Expandable<T = string> = { expand?: Array<T> }
+
 // Request Options
 
 export interface GetOptions {
