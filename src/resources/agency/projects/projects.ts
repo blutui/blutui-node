@@ -1,6 +1,17 @@
 import { Agency } from '@/agency'
-import { Project } from './interfaces'
-import { deserializeProjectList } from './serializers'
+import {
+  CreateProjectOptions,
+  Project,
+  ProjectResponse,
+  SerializedCreateProjectOptions,
+  SerializedUpdateProjectOptions,
+} from './interfaces'
+import {
+  deserializeProject,
+  deserializeProjectList,
+  serializeCreateProjectOptions,
+  serializeUpdateProjectOptions,
+} from './serializers'
 import { Expandable, List, PaginationOptions } from '@/types'
 
 export class Projects {
@@ -17,5 +28,43 @@ export class Projects {
     })
 
     return deserializeProjectList(data)
+  }
+
+  /**
+   * Get a project's information by ID.
+   */
+  async get(
+    id: string,
+    options: Expandable<'primary_domain'>
+  ): Promise<Project> {
+    const { data } = await this.agency.get<ProjectResponse>(`projects/${id}`, {
+      query: options,
+    })
+
+    return deserializeProject(data)
+  }
+
+  /**
+   * Add a project to your agency.
+   */
+  async create(payload: CreateProjectOptions): Promise<Project> {
+    const { data } = await this.agency.post<
+      ProjectResponse,
+      SerializedCreateProjectOptions
+    >('projects', serializeCreateProjectOptions(payload))
+
+    return deserializeProject(data)
+  }
+
+  /**
+   * Update a project in your agency.
+   */
+  async update(id: string, payload: {}): Promise<Project> {
+    const { data } = await this.agency.patch<
+      ProjectResponse,
+      SerializedUpdateProjectOptions
+    >(`projects/${id}`, serializeUpdateProjectOptions(payload))
+
+    return deserializeProject(data)
   }
 }

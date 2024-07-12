@@ -39,7 +39,7 @@ export class Domains {
   }
 
   /**
-   * Get a domain information by id.
+   * Get a domain's information by ID.
    */
   async get(id: string, options?: Expandable<'project'>): Promise<Domain> {
     const { data } = await this.agency.get<DomainResponse>(`domains/${id}`, {
