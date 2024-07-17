@@ -110,12 +110,10 @@ export class Domains {
   /**
    * Search for domains in your agency.
    */
-  async search(
-    searchDomainOptions: SearchDomainOptions
-  ): Promise<List<Domain>> {
+  async search(payload: SearchDomainOptions): Promise<List<Domain>> {
     const { data } = await this.agency.post<ListResponse<DomainResponse>>(
       'domains/search',
-      searchDomainOptions
+      payload
     )
     return deserializeDomainList(data)
   }
