@@ -23,7 +23,7 @@ export const deserializeProject = (project: ProjectResponse): Project => ({
 export const deserializeProjectList = (
   projects: ListResponse<ProjectResponse>
 ): List<Project> => ({
-  object: 'list',
+  object: projects.object,
   data: projects.data.map(deserializeProject),
   meta: deserializePaginationMeta(projects.meta),
 })

@@ -33,9 +33,12 @@ export class Projects {
   async list(
     options?: PaginationOptions & Expandable<'primary_domain'>
   ): Promise<List<Project>> {
-    const { data } = await this.agency.get('projects', {
-      query: options,
-    })
+    const { data } = await this.agency.get<ListResponse<ProjectResponse>>(
+      'projects',
+      {
+        query: options,
+      }
+    )
 
     return deserializeProjectList(data)
   }

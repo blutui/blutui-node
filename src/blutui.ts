@@ -11,6 +11,7 @@ import {
 import { Client } from './utils/client'
 
 import { User } from './resources'
+import { Agencies } from './resources/agency'
 
 import type {
   BlutuiOptions,
@@ -30,6 +31,7 @@ export class Blutui {
   private readonly client: Client
   private readonly _agencies: Record<string, Agency> = {}
 
+  readonly agencies = new Agencies(this)
   readonly user = new User(this)
 
   /**
