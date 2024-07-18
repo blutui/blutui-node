@@ -117,7 +117,7 @@ describe('Domain', () => {
   })
 
   describe('search', () => {
-    it('Search for domains in your agency.', async () => {
+    it('can search for domains', async () => {
       fetchOnce(domainListFixture)
       await blutui.agency('foo').domains.search({ name: 'example.com' })
 
