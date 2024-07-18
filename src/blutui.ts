@@ -10,7 +10,7 @@ import {
 } from './exceptions'
 import { Client } from './utils/client'
 
-import { User } from './resources'
+import { User } from './core'
 
 import type {
   BlutuiOptions,

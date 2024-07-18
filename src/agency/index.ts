@@ -1,7 +1,10 @@
-import { Blutui } from './blutui'
+import { Blutui } from '@/blutui'
 
-import { Brand, Domains, Projects } from './resources/agency'
-import type { GetOptions, PostOptions } from './types'
+import { Brand } from './brand/brand'
+import { Domains } from './domains/domains'
+import { Projects } from './projects/projects'
+
+import type { GetOptions, PostOptions } from '@/types'
 
 export class Agency {
   readonly brand = new Brand(this)
