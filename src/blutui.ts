@@ -10,8 +10,7 @@ import {
 } from './exceptions'
 import { Client } from './utils/client'
 
-import { User } from './resources'
-import { Agencies } from './resources/agency'
+import { Agencies, User } from './resources'
 
 import type {
   BlutuiOptions,
