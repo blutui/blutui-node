@@ -24,7 +24,7 @@
     "dev": "npm run build -- --watch",
     "test": "jest",
     "lint": "biome lint --error-on-warnings ./src",
-    "format": "biome format ./src",
+    "format": "biome format --write ./src",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

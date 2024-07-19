@@ -74,7 +74,9 @@ describe('Domain', () => {
         .agency('foo')
         .domains.update(domainFixture.id, { project: 'project-uuid' })
 
-      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}`)
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}`
+      )
       expect(domain).toMatchObject({
         object: 'domain',
       })
@@ -117,7 +119,7 @@ describe('Domain', () => {
   describe('search', () => {
     it('Search for domains in your agency.', async () => {
       fetchOnce(domainListFixture)
-      await blutui.agency('foo').domains.search({"name": "example.com"})
+      await blutui.agency('foo').domains.search({ name: 'example.com' })
 
       expect(fetchURL()).toBe(
         `${blutui.baseURL}/v1/agencies/foo/domains/search`

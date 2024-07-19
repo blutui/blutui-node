@@ -17,7 +17,12 @@ import type {
   UpdateDomainOptions,
   Domain,
 } from './interfaces'
-import type { DeletedResponse, List, ListResponse, PaginationOptions } from '@/types'
+import type {
+  DeletedResponse,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
 
 export class Domains {
   constructor(private readonly agency: Agency) {}
@@ -83,10 +88,10 @@ export class Domains {
    * Refresh the verification token for a domain from your agency.
    */
   async refresh(id: string): Promise<Domain> {
-    const { data } = await this.agency.post<DomainResponse, Record<string, never>>(
-      `domains/${id}/refresh`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      DomainResponse,
+      Record<string, never>
+    >(`domains/${id}/refresh`, {})
 
     return deserializeDomain(data)
   }
@@ -95,10 +100,10 @@ export class Domains {
    * Check the verification status for a domain in your agency.
    */
   async verify(id: string): Promise<DomainVerifyResponse> {
-    const { data } = await this.agency.post<DomainVerifyResponse, Record<string, never>>(
-      `domains/${id}/verify`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      DomainVerifyResponse,
+      Record<string, never>
+    >(`domains/${id}/verify`, {})
     return data
   }
 
@@ -108,10 +113,10 @@ export class Domains {
   async search(
     searchDomainOptions: SearchDomainOptions
   ): Promise<List<Domain>> {
-    const { data } = await this.agency.post<ListResponse<DomainResponse>, SerializedSearchDomainOptions>(
-      'domains/search',
-      searchDomainOptions
-    )
+    const { data } = await this.agency.post<
+      ListResponse<DomainResponse>,
+      SerializedSearchDomainOptions
+    >('domains/search', searchDomainOptions)
 
     return deserializeDomainList(data)
   }

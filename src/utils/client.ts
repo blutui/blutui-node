@@ -70,7 +70,10 @@ export class Client {
   /**
    * Create a new version path.
    */
-  private pathUsingVersion(path: string, version: string = API_VERSION): string {
+  private pathUsingVersion(
+    path: string,
+    version: string = API_VERSION
+  ): string {
     const newPath = path.startsWith('/') ? path.replace('/', '') : path
 
     return `${version}/${newPath}`

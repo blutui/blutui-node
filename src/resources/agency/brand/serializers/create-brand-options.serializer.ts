@@ -1,4 +1,7 @@
-import type { CreateBrandOptions, SerializedCreateBrandOptions } from '../interfaces'
+import type {
+  CreateBrandOptions,
+  SerializedCreateBrandOptions,
+} from '../interfaces'
 
 export const serializeCreateBrandOptions = (
   options: CreateBrandOptions
