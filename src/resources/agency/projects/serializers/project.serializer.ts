@@ -1,6 +1,7 @@
-import { List, ListResponse } from '@/types'
-import { Project, ProjectResponse } from '../interfaces'
 import { deserializePaginationMeta } from '@/utils/serializers'
+
+import type { List, ListResponse } from '@/types'
+import type { Project, ProjectResponse } from '../interfaces'
 
 export const deserializeProject = (project: ProjectResponse): Project => ({
   id: project.id,

@@ -1,14 +1,3 @@
-import { Agency } from '@/agency'
-import {
-  CreateProjectOptions,
-  Project,
-  ProjectResponse,
-  SearchProjectOptions,
-  SerializedCreateProjectOptions,
-  SerializedUpdateProjectOptions,
-  UpdateProjectOptions,
-} from './interfaces'
-import { Domain, DomainResponse } from '../domains/interfaces'
 import {
   deserializeProject,
   deserializeProjectList,
@@ -16,7 +5,20 @@ import {
   serializeUpdateProjectOptions,
 } from './serializers'
 import { deserializeDomainList } from '../domains/serializers'
-import {
+
+import type { Agency } from '@/agency'
+import type {
+  CreateProjectOptions,
+  Project,
+  ProjectResponse,
+  SearchProjectOptions,
+  SerializedCreateProjectOptions,
+  SerializedSearchProjectOptions,
+  SerializedUpdateProjectOptions,
+  UpdateProjectOptions,
+} from './interfaces'
+import type { Domain, DomainResponse } from '../domains/interfaces'
+import type {
   DeletedResponse,
   Expandable,
   List,
@@ -135,13 +137,12 @@ export class Projects {
     payload: SearchProjectOptions,
     options?: Expandable<'primary_domain'>
   ): Promise<List<Project>> {
-    const { data } = await this.agency.post<ListResponse<ProjectResponse>>(
-      'projects/search',
-      payload,
-      {
-        query: options,
-      }
-    )
+    const { data } = await this.agency.post<
+      ListResponse<ProjectResponse>,
+      SerializedSearchProjectOptions
+    >('projects/search', payload, {
+      query: options,
+    })
 
     return deserializeProjectList(data)
   }
@@ -152,10 +153,10 @@ export class Projects {
    * NOTE: An active Blutui subscription is required to perform this action.
    */
   async publish(id: string): Promise<Project> {
-    const { data } = await this.agency.post<ProjectResponse>(
-      `projects/${id}/publish`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      ProjectResponse,
+      Record<string, never>
+    >(`projects/${id}/publish`, {})
 
     return deserializeProject(data)
   }
@@ -164,10 +165,10 @@ export class Projects {
    * Republish a project with the given ID.
    */
   async republish(id: string): Promise<Project> {
-    const { data } = await this.agency.post<ProjectResponse>(
-      `projects/${id}/republish`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      ProjectResponse,
+      Record<string, never>
+    >(`projects/${id}/republish`, {})
 
     return deserializeProject(data)
   }
@@ -176,10 +177,10 @@ export class Projects {
    * Unpublish a project with the given ID.
    */
   async unpublish(id: string): Promise<Project> {
-    const { data } = await this.agency.post<ProjectResponse>(
-      `projects/${id}/unpublish`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      ProjectResponse,
+      Record<string, never>
+    >(`projects/${id}/unpublish`, {})
 
     return deserializeProject(data)
   }

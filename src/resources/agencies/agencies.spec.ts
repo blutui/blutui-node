@@ -17,7 +17,7 @@ describe('Agency', () => {
       fetchOnce(agencyListFixture)
       const agencies = await blutui.agencies.list()
 
-      expect(fetchURL()).toBe(blutui.baseURL + `/v1/agencies`)
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies`)
       expect(agencies).toMatchObject({
         object: 'list',
       })
@@ -30,7 +30,7 @@ describe('Agency', () => {
       const agency = await blutui.agencies.get(agencyFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/${agencyFixture.id}`
+        `${blutui.baseURL}/v1/agencies/${agencyFixture.id}`
       )
       expect(agency).toMatchObject({
         id: '9af3accc-1536-4336-8cc3-3b3b2a96c18a',
@@ -48,7 +48,7 @@ describe('Agency', () => {
       })
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/${agencyFixture.id}`
+        `${blutui.baseURL}/v1/agencies/${agencyFixture.id}`
       )
       expect(agency).toMatchObject({
         id: '9af3accc-1536-4336-8cc3-3b3b2a96c18a',

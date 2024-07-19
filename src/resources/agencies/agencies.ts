@@ -1,17 +1,17 @@
-import { Blutui } from '@/blutui'
-
-import {
-  Agency,
-  AgencyResponse,
-  SerializedUpdateAgencyOptions,
-  UpdateAgencyOptions,
-} from './interfaces'
 import {
   deserializeAgency,
   deserializeAgencyList,
   serializeUpdateAgencyOptions,
 } from './serializers'
-import { List, ListResponse, PaginationOptions } from '@/types'
+
+import type { Blutui } from '@/blutui'
+import type {
+  Agency,
+  AgencyResponse,
+  SerializedUpdateAgencyOptions,
+  UpdateAgencyOptions,
+} from './interfaces'
+import type { List, ListResponse, PaginationOptions } from '@/types'
 
 export class Agencies {
   constructor(private readonly blutui: Blutui) {}

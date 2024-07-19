@@ -1,6 +1,7 @@
-import { List, ListResponse } from '@/types'
-import { Agency, AgencyResponse } from '../interfaces'
 import { deserializePaginationMeta } from '@/utils/serializers'
+
+import type { List, ListResponse } from '@/types'
+import type { Agency, AgencyResponse } from '../interfaces'
 
 export const deserializeAgency = (agency: AgencyResponse): Agency => ({
   id: agency.id,

@@ -1,4 +1,4 @@
-import {
+import type {
   SerializedUpdateAgencyOptions,
   UpdateAgencyOptions,
 } from '../interfaces'

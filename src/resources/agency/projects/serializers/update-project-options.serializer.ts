@@ -1,4 +1,4 @@
-import {
+import type {
   SerializedUpdateProjectOptions,
   UpdateProjectOptions,
 } from '../interfaces'
