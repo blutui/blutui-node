@@ -1,4 +1,4 @@
-import { User, UserResponse } from '../interfaces'
+import type { User, UserResponse } from '../interfaces'
 
 export const deserializeUser = (user: UserResponse): User => ({
   id: user.id,

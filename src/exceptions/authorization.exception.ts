@@ -9,6 +9,6 @@ export class AuthorizationException extends Error {
     this.type = type
     this.message =
       message ??
-      `The request could not be authorized. Maybe your access token has invalid scopes?`
+      'The request could not be authorized. Maybe your access token has invalid scopes?'
   }
 }

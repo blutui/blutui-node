@@ -1,4 +1,4 @@
-import {
+import type {
   CreateDomainOptions,
   SerializedCreateDomainOptions,
 } from '../interfaces'

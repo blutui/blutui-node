@@ -16,7 +16,7 @@ describe('Domain', () => {
       fetchOnce(domainListFixture)
       const domains = await blutui.agency('foo').domains.list()
 
-      expect(fetchURL()).toBe(blutui.baseURL + `/v1/agencies/foo/domains`)
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/domains`)
       expect(domains).toMatchObject({
         object: 'list',
       })
@@ -29,7 +29,7 @@ describe('Domain', () => {
       const domain = await blutui.agency('foo').domains.get(domainFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/domains/${domainFixture.id}`
+        `${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}`
       )
       expect(domain).toMatchObject({
         object: 'domain',
@@ -59,7 +59,7 @@ describe('Domain', () => {
         name: 'example.com',
       })
 
-      expect(fetchURL()).toBe(blutui.baseURL + '/v1/agencies/foo/domains')
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/domains`)
       expect(domain).toMatchObject({
         object: 'domain',
         name: 'example.com',
@@ -74,7 +74,7 @@ describe('Domain', () => {
         .agency('foo')
         .domains.update(domainFixture.id, { project: 'project-uuid' })
 
-      expect(fetchURL()).toBe(blutui.baseURL + `/v1/agencies/foo/domains/${domainFixture.id}`)
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}`)
       expect(domain).toMatchObject({
         object: 'domain',
       })
@@ -87,7 +87,7 @@ describe('Domain', () => {
       await blutui.agency('foo').domains.remove(domainFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/domains/${domainFixture.id}`
+        `${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}`
       )
     })
   })
@@ -98,7 +98,7 @@ describe('Domain', () => {
       await blutui.agency('foo').domains.refresh(domainFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/domains/${domainFixture.id}/refresh`
+        `${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}/refresh`
       )
     })
   })
@@ -109,7 +109,7 @@ describe('Domain', () => {
       await blutui.agency('foo').domains.verify(domainFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/domains/${domainFixture.id}/verify`
+        `${blutui.baseURL}/v1/agencies/foo/domains/${domainFixture.id}/verify`
       )
     })
   })
@@ -120,7 +120,7 @@ describe('Domain', () => {
       await blutui.agency('foo').domains.search({"name": "example.com"})
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/domains/search`
+        `${blutui.baseURL}/v1/agencies/foo/domains/search`
       )
     })
   })

@@ -10,7 +10,7 @@ export class Client {
 
   async get(
     path: string,
-    options: { params?: Record<string, any>; headers?: HeadersInit }
+    options: { params?: Record<string, unknown>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
     return await this.fetch(resourceURL, {
@@ -18,10 +18,10 @@ export class Client {
     })
   }
 
-  async post<Entity = any>(
+  async post<Entity>(
     path: string,
     entity: Entity,
-    options: { params?: Record<string, any>; headers?: HeadersInit }
+    options: { params?: Record<string, unknown>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
 
@@ -32,10 +32,10 @@ export class Client {
     })
   }
 
-  async patch<Entity = any>(
+  async patch<Entity>(
     path: string,
     entity: Entity,
-    options: { params?: Record<string, any>; headers?: HeadersInit }
+    options: { params?: Record<string, unknown>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
 
@@ -48,7 +48,7 @@ export class Client {
 
   async delete(
     path: string,
-    options: { params?: Record<string, any>; headers?: HeadersInit }
+    options: { params?: Record<string, unknown>; headers?: HeadersInit }
   ) {
     const resourceURL = this.getResourceURL(path, options.params)
 
@@ -58,7 +58,7 @@ export class Client {
     })
   }
 
-  private getResourceURL(path: string, params?: Record<string, any>) {
+  private getResourceURL(path: string, params?: Record<string, unknown>) {
     const queryString = getQueryString(params)
     const url = new URL(
       [this.pathUsingVersion(path), queryString].filter(Boolean).join('?'),
@@ -67,9 +67,13 @@ export class Client {
     return url.toString()
   }
 
-  private pathUsingVersion(path: string, version: string = API_VERSION) {
-    path = path.startsWith('/') ? path.replace('/', '') : path
-    return version + '/' + path
+  /**
+   * Create a new version path.
+   */
+  private pathUsingVersion(path: string, version: string = API_VERSION): string {
+    const newPath = path.startsWith('/') ? path.replace('/', '') : path
+
+    return `${version}/${newPath}`
   }
 
   private async fetch(url: string, options?: RequestInit) {
@@ -106,24 +110,25 @@ export class Client {
   }
 }
 
-function getQueryString(queryObj?: Record<string, any>) {
+function getQueryString(queryObj?: Record<string, unknown>) {
   if (!queryObj) return undefined
 
   const sanitizedQueryObj: string[][] = []
 
-  Object.entries(queryObj).forEach(([param, value]) => {
+  for (const [param, value] of Object.entries(queryObj)) {
     if (Array.isArray(value)) {
-      value.forEach((element) => {
+      for (const element of value) {
         if (element !== '' && element !== undefined)
           sanitizedQueryObj.push([`${param}[]`, element])
-      })
-    } else if (value !== '' && value !== undefined)
+      }
+    } else if (value && typeof value === 'string') {
       sanitizedQueryObj.push([param, value])
-  })
+    }
+  }
 
   return new URLSearchParams(sanitizedQueryObj).toString()
 }
 
-function getBody(entity: any): BodyInit | null | undefined {
+function getBody<Entity>(entity: Entity): BodyInit | null | undefined {
   return JSON.stringify(entity)
 }

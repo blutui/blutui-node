@@ -1,7 +1,6 @@
-import { Blutui } from '@/blutui'
-
 import { deserializeUser, deserializeUserEmail } from './serializers'
 
+import type { Blutui } from '@/blutui'
 import type {
   UserEmail,
   UserEmailResponse,

@@ -1,7 +1,7 @@
-import fetch, { MockParams } from 'jest-fetch-mock'
+import fetch, { type MockParams } from 'jest-fetch-mock'
 
 export function fetchOnce(
-  response: {} = {},
+  response: Record<string, unknown> = {},
   { status = 200, headers, ...rest }: MockParams = {}
 ) {
   return fetch.once(JSON.stringify(response), {

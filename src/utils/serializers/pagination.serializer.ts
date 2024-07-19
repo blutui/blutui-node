@@ -1,4 +1,4 @@
-import { PaginationMeta, PaginationMetaResponse } from '@/types'
+import type { PaginationMeta, PaginationMetaResponse } from '@/types'
 
 export const deserializePaginationMeta = (
   meta: PaginationMetaResponse

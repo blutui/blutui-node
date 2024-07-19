@@ -1,4 +1,6 @@
-export interface BlutuiOptions {}
+export interface BlutuiOptions {
+  apiHostname?: string
+}
 
 // List
 
@@ -36,27 +38,29 @@ export interface PaginationMetaResponse {
   last_page: number
 }
 
-export interface PaginationOptions {
+export type PaginationOptions = {
   limit?: number
   page?: number
 }
 
 // Request Options
 
+type QueryParams = string | string[] | number | null
+
 export interface GetOptions {
-  query?: { [key: string]: any }
+  query?: { [key: string]: QueryParams }
 }
 
 export interface PostOptions {
-  query?: { [key: string]: any }
+  query?: { [key: string]: QueryParams }
 }
 
 export interface PatchOptions {
-  query?: { [key: string]: any }
+  query?: { [key: string]: QueryParams }
 }
 
 export interface DeleteOptions {
-  query?: { [key: string]: any }
+  query?: { [key: string]: QueryParams }
 }
 
 // Response
