@@ -16,7 +16,7 @@ export class ValidationException extends Error {
   }) {
     super()
     this.type = type
-    this.message = message ?? `Validation failed.`
+    this.message = message ?? 'Validation failed.'
     this.errors = errors
   }
 }

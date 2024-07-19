@@ -1,8 +1,7 @@
 {
   "recommendations": [
     // JS Language plugins (~required)
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "biomejs.biome",
 
     // Highly recommended
     "EditorConfig.editorconfig"

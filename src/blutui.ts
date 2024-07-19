@@ -1,6 +1,6 @@
 import { Agency } from './agency'
 import {
-  FetchException,
+  type FetchException,
   GenericServerException,
   NoAccessTokenProvidedException,
   NotFoundException,
@@ -51,7 +51,7 @@ export class Blutui {
     const apiHostname = DEFAULT_HOSTNAME
     this.baseURL = `https://${apiHostname}`
 
-    let useAgent: string = `blutui-node/${VERSION}`
+    const useAgent: string = `blutui-node/${VERSION}`
 
     this.client = new Client(this.baseURL, {
       headers: {
@@ -81,7 +81,7 @@ export class Blutui {
     return this._agencies[username]
   }
 
-  async get<Result = any>(
+  async get<Result>(
     path: string,
     options: GetOptions = {}
   ): Promise<{ data: Result }> {
@@ -96,7 +96,7 @@ export class Blutui {
     }
   }
 
-  async post<Result = any, Entity = any>(
+  async post<Result, Entity>(
     path: string,
     entity: Entity,
     options: PostOptions = {}
@@ -112,7 +112,7 @@ export class Blutui {
     }
   }
 
-  async patch<Result = any, Entity = any>(
+  async patch<Result, Entity>(
     path: string,
     entity: Entity,
     options: PatchOptions = {}
@@ -128,7 +128,7 @@ export class Blutui {
     }
   }
 
-  async delete<Result = any>(
+  async delete<Result>(
     path: string,
     options: DeleteOptions = {}
   ): Promise<{ data: Result }> {

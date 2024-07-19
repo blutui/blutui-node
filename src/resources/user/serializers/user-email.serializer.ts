@@ -1,4 +1,4 @@
-import { UserEmail, UserEmailResponse } from '../interfaces'
+import type { UserEmail, UserEmailResponse } from '../interfaces'
 
 export const deserializeUserEmail = (
   userEmail: UserEmailResponse
