@@ -124,8 +124,9 @@ function getQueryString(queryObj?: Record<string, unknown>) {
         if (element !== '' && element !== undefined)
           sanitizedQueryObj.push([`${param}[]`, element])
       }
-    } else if (value && typeof value === 'string') {
-      sanitizedQueryObj.push([param, value])
+    } else if (value) {
+      const newValue = String(value)
+      sanitizedQueryObj.push([param, newValue])
     }
   }
 
