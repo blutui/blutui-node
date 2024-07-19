@@ -1,5 +1,10 @@
+// Blutui Options
+
 export interface BlutuiOptions {
   apiHostname?: string
+  request?: {
+    fetch?: typeof fetch
+  }
 }
 
 // List
