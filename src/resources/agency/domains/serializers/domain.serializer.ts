@@ -1,6 +1,7 @@
-import { List, ListResponse } from '@/types'
-import { Domain, DomainResponse } from '../interfaces'
 import { deserializePaginationMeta } from '@/utils/serializers'
+
+import type { List, ListResponse } from '@/types'
+import type { Domain, DomainResponse } from '../interfaces'
 
 export const deserializeDomain = (domain: DomainResponse): Domain => ({
   id: domain.id,

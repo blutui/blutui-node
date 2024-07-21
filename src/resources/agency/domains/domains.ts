@@ -1,23 +1,24 @@
-import { Agency } from '@/agency'
-import type {
-  CreateDomainOptions,
-  DomainResponse,
-  DomainVerifyResponse,
-  SearchDomainOptions,
-  SerializedCreateDomainOptions,
-  SerializedUpdateDomainOptions,
-  UpdateDomainOptions,
-  Domain,
-} from './interfaces'
 import {
   deserializeDomain,
   deserializeDomainList,
   serializeCreateDomainOptions,
   serializeUpdateDomainOptions,
 } from './serializers'
-import {
+
+import type { Agency } from '@/agency'
+import type {
+  CreateDomainOptions,
+  DomainResponse,
+  DomainVerifyResponse,
+  SearchDomainOptions,
+  SerializedCreateDomainOptions,
+  SerializedSearchDomainOptions,
+  SerializedUpdateDomainOptions,
+  UpdateDomainOptions,
+  Domain,
+} from './interfaces'
+import type {
   DeletedResponse,
-  Expandable,
   List,
   ListResponse,
   PaginationOptions,
@@ -88,10 +89,10 @@ export class Domains {
    * Refresh the verification token for a domain from your agency.
    */
   async refresh(id: string): Promise<Domain> {
-    const { data } = await this.agency.post<DomainResponse>(
-      `domains/${id}/refresh`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      DomainResponse,
+      Record<string, never>
+    >(`domains/${id}/refresh`, {})
 
     return deserializeDomain(data)
   }
@@ -100,10 +101,10 @@ export class Domains {
    * Check the verification status for a domain in your agency.
    */
   async verify(id: string): Promise<DomainVerifyResponse> {
-    const { data } = await this.agency.post<DomainVerifyResponse>(
-      `domains/${id}/verify`,
-      {}
-    )
+    const { data } = await this.agency.post<
+      DomainVerifyResponse,
+      Record<string, never>
+    >(`domains/${id}/verify`, {})
     return data
   }
 
@@ -111,10 +112,11 @@ export class Domains {
    * Search for domains in your agency.
    */
   async search(payload: SearchDomainOptions): Promise<List<Domain>> {
-    const { data } = await this.agency.post<ListResponse<DomainResponse>>(
-      'domains/search',
-      payload
-    )
+    const { data } = await this.agency.post<
+      ListResponse<DomainResponse>,
+      SerializedSearchDomainOptions
+    >('domains/search', payload)
+
     return deserializeDomainList(data)
   }
 }

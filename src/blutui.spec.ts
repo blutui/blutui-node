@@ -1,5 +1,5 @@
 import fetch from 'jest-fetch-mock'
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
 
 import { Agency } from './agency'
 import { Blutui } from './blutui'
@@ -16,7 +16,7 @@ describe('Blutui', () => {
     beforeEach(() => {
       jest.resetModules()
       process.env = { ...OLD_ENV }
-      delete process.env.NODE_ENV
+      process.env.NODE_ENV = undefined
     })
 
     afterEach(() => {
