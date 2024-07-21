@@ -18,7 +18,7 @@ describe('Project', () => {
       fetchOnce(projectListFixture)
       const projects = await blutui.agency('foo').projects.list()
 
-      expect(fetchURL()).toBe(blutui.baseURL + `/v1/agencies/foo/projects`)
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/projects`)
       expect(projects).toMatchObject({
         object: 'list',
       })
@@ -32,7 +32,7 @@ describe('Project', () => {
 
       expect(fetchURL()).toBe(
         encodeURI(
-          blutui.baseURL + `/v1/agencies/foo/projects?expand[]=primary_domain`
+          `${blutui.baseURL}/v1/agencies/foo/projects?expand[]=primary_domain`
         )
       )
       expect(projects).toMatchObject({
@@ -47,7 +47,7 @@ describe('Project', () => {
       const project = await blutui.agency('foo').projects.get(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/projects/${projectFixture.id}`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}`
       )
       expect(project).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
@@ -63,8 +63,7 @@ describe('Project', () => {
 
       expect(fetchURL()).toBe(
         encodeURI(
-          blutui.baseURL +
-            `/v1/agencies/foo/projects/${projectFixture.id}?expand[]=primary_domain`
+          `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}?expand[]=primary_domain`
         )
       )
       expect(project).toMatchObject({
@@ -81,7 +80,7 @@ describe('Project', () => {
         name: 'One',
       })
 
-      expect(fetchURL()).toBe(blutui.baseURL + '/v1/agencies/foo/projects')
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/projects`)
       expect(project).toMatchObject({
         object: 'project',
         name: 'One',
@@ -99,7 +98,7 @@ describe('Project', () => {
         })
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/projects/${projectFixture.id}`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}`
       )
       expect(project).toMatchObject({
         object: 'project',
@@ -116,7 +115,7 @@ describe('Project', () => {
         .projects.remove(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/projects/${projectFixture.id}`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}`
       )
       expect(archivedProject).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
@@ -134,7 +133,7 @@ describe('Project', () => {
         .projects.archived({ limit: 2 })
 
       expect(fetchURL()).toBe(
-        encodeURI(blutui.baseURL + `/v1/agencies/foo/projects/archived?limit=2`)
+        encodeURI(`${blutui.baseURL}/v1/agencies/foo/projects/archived?limit=2`)
       )
       expect(projects).toMatchObject({
         object: 'list',
@@ -150,8 +149,7 @@ describe('Project', () => {
         .projects.restore(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL +
-          `/v1/agencies/foo/projects/${projectFixture.id}/archived`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/archived`
       )
       expect(project).toMatchObject({
         object: 'project',
@@ -168,8 +166,7 @@ describe('Project', () => {
         .projects.domains(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL +
-          `/v1/agencies/foo/projects/${projectFixture.id}/domains`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/domains`
       )
       expect(domains).toMatchObject({
         object: 'list',
@@ -185,7 +182,7 @@ describe('Project', () => {
         .projects.search({ name: 'One' })
 
       expect(fetchURL()).toBe(
-        blutui.baseURL + `/v1/agencies/foo/projects/search`
+        `${blutui.baseURL}/v1/agencies/foo/projects/search`
       )
       expect(projects).toMatchObject({
         object: 'list',
@@ -201,8 +198,7 @@ describe('Project', () => {
         .projects.publish(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL +
-          `/v1/agencies/foo/projects/${projectFixture.id}/publish`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/publish`
       )
       expect(project).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
@@ -219,8 +215,7 @@ describe('Project', () => {
         .projects.republish(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL +
-          `/v1/agencies/foo/projects/${projectFixture.id}/republish`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/republish`
       )
       expect(project).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
@@ -237,8 +232,7 @@ describe('Project', () => {
         .projects.unpublish(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        blutui.baseURL +
-          `/v1/agencies/foo/projects/${projectFixture.id}/unpublish`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/unpublish`
       )
       expect(project).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',

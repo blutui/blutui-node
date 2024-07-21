@@ -19,6 +19,7 @@ import type {
 } from './interfaces'
 import type {
   DeletedResponse,
+  Expandable,
   List,
   ListResponse,
   PaginationOptions,
