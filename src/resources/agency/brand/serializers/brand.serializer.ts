@@ -1,4 +1,4 @@
-import { Brand, BrandResponse } from '../interfaces'
+import type { Brand, BrandResponse } from '../interfaces'
 
 export const deserializeBrand = (brand: BrandResponse): Brand => ({
   id: brand.id,
