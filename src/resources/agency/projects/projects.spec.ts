@@ -3,6 +3,7 @@ import { Blutui } from '@/blutui'
 import { fetchOnce, fetchURL } from '@/utils/testing'
 
 import projectFixture from './fixtures/project.json'
+import projectWithPrimaryDomainFixture from './fixtures/project-with-primary-domain.json'
 import projectListFixture from './fixtures/project-list.json'
 import domainListFixture from '../domains/fixtures/domain-list.json'
 
@@ -53,22 +54,29 @@ describe('Project', () => {
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
         object: 'project',
       })
+      expect(typeof project.primaryDomain).toBe('string')
     })
 
     it('can retrieve a project with an expanded primary domain', async () => {
-      fetchOnce(projectFixture)
+      fetchOnce(projectWithPrimaryDomainFixture)
       const project = await blutui
         .agency('foo')
-        .projects.get(projectFixture.id, { expand: ['primary_domain'] })
+        .projects.get(projectWithPrimaryDomainFixture.id, {
+          expand: ['primary_domain'],
+        })
 
       expect(fetchURL()).toBe(
         encodeURI(
-          `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}?expand[]=primary_domain`
+          `${blutui.baseURL}/v1/agencies/foo/projects/${projectWithPrimaryDomainFixture.id}?expand[]=primary_domain`
         )
       )
       expect(project).toMatchObject({
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
         object: 'project',
+      })
+      expect(project.primaryDomain).toMatchObject({
+        id: '9bfdb42b-1bf0-4510-978e-46aa329f8efa',
+        verifiedAt: null,
       })
     })
   })
