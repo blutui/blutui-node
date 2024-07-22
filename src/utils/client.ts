@@ -13,18 +13,13 @@ export class Client {
     readonly options?: RequestInit,
     fetchFn?: typeof fetch
   ) {
-    let newFetchFn = fetchFn
+    this._fetchFn = fetchFn || globalThis.fetch
 
-    if (!newFetchFn) {
-      if (!globalThis.fetch) {
-        throw new Error(
-          'Fetch function not defined in the global scope and no replacement was provided.'
-        )
-      }
-      newFetchFn = globalThis.fetch
+    if (!this._fetchFn) {
+      throw new Error(
+        'Fetch function not defined in the global scope and no replacement was provided.'
+      )
     }
-
-    this._fetchFn = newFetchFn
   }
 
   async get(
