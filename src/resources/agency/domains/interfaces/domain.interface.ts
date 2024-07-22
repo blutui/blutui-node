@@ -1,10 +1,12 @@
+import type { Project, ProjectResponse } from '../../projects/interfaces'
+
 export interface Domain {
   id: string
   object: 'domain'
   name: string
   token: string
-  project: string | Record<string, unknown>
-  verifiedAt: number
+  project: string | null | Project
+  verifiedAt: number | null
   createdAt: number
   updatedAt: number
 }
@@ -14,8 +16,8 @@ export interface DomainResponse {
   object: 'domain'
   name: string
   token: string
-  project: string | Record<string, unknown>
-  verified_at: number
+  project: string | null | ProjectResponse
+  verified_at: number | null
   created_at: number
   updated_at: number
 }

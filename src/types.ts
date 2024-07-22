@@ -43,6 +43,10 @@ export type PaginationOptions = {
   page?: number
 }
 
+// Expand resources
+
+export type Expandable<T = string> = { expand?: Array<T> }
+
 // Request Options
 
 type QueryParams = string | string[] | number | null

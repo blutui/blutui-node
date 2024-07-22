@@ -19,6 +19,7 @@ import type {
 } from './interfaces'
 import type {
   DeletedResponse,
+  Expandable,
   List,
   ListResponse,
   PaginationOptions,
@@ -30,18 +31,19 @@ export class Domains {
   /**
    * Get the domains list for the current agency.
    */
-  async list(paginationOptions?: PaginationOptions): Promise<List<Domain>> {
+  async list(options?: PaginationOptions): Promise<List<Domain>> {
     const { data } = await this.agency.get<ListResponse<DomainResponse>>(
       'domains',
-      { query: paginationOptions }
+      { query: options }
     )
+
     return deserializeDomainList(data)
   }
 
   /**
-   * Get a domain information by id.
+   * Get a domain's information by ID.
    */
-  async get(id: string, options?: { expand: string[] }): Promise<Domain> {
+  async get(id: string, options?: Expandable<'project'>): Promise<Domain> {
     const { data } = await this.agency.get<DomainResponse>(`domains/${id}`, {
       query: options,
     })
@@ -110,13 +112,11 @@ export class Domains {
   /**
    * Search for domains in your agency.
    */
-  async search(
-    searchDomainOptions: SearchDomainOptions
-  ): Promise<List<Domain>> {
+  async search(payload: SearchDomainOptions): Promise<List<Domain>> {
     const { data } = await this.agency.post<
       ListResponse<DomainResponse>,
       SerializedSearchDomainOptions
-    >('domains/search', searchDomainOptions)
+    >('domains/search', payload)
 
     return deserializeDomainList(data)
   }

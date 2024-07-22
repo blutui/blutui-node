@@ -1,8 +1,10 @@
 import fetch from 'jest-fetch-mock'
 import { Blutui } from '@/blutui'
 import { fetchOnce, fetchURL } from '@/utils/testing'
+
 import domainFixture from './fixtures/domain.json'
-import domainListFixture from './fixtures/domainList.json'
+import domainWithProjectFixture from './fixtures/domain-with-project.json'
+import domainListFixture from './fixtures/domain-list.json'
 
 const accessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
@@ -34,20 +36,27 @@ describe('Domain', () => {
       expect(domain).toMatchObject({
         object: 'domain',
       })
+      expect(typeof domain.project).toBe('string')
     })
 
     it('can retrieve a domain information with project', async () => {
-      fetchOnce(domainFixture)
-      const domain = await blutui.agency('foo').domains.get(domainFixture.id, {
-        expand: ['project'],
-      })
+      fetchOnce(domainWithProjectFixture)
+      const domain = await blutui
+        .agency('foo')
+        .domains.get(domainWithProjectFixture.id, {
+          expand: ['project'],
+        })
       expect(fetchURL()).toContain(
         encodeURI(
-          `/v1/agencies/foo/domains/${domainFixture.id}?expand[]=project`
+          `/v1/agencies/foo/domains/${domainWithProjectFixture.id}?expand[]=project`
         )
       )
       expect(domain).toMatchObject({
         object: 'domain',
+      })
+      expect(domain.project).toMatchObject({
+        id: '99bc147e-966c-4dd0-8def-de817c63cf41',
+        createdAt: 1720758022,
       })
     })
   })
@@ -117,7 +126,7 @@ describe('Domain', () => {
   })
 
   describe('search', () => {
-    it('Search for domains in your agency.', async () => {
+    it('can search for domains', async () => {
       fetchOnce(domainListFixture)
       await blutui.agency('foo').domains.search({ name: 'example.com' })
 

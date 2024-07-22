@@ -1,0 +1,30 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "99bc147e-966c-4dd0-8def-de817c63cf41",
+      "object": "project",
+      "name": "One",
+      "description": "One",
+      "image": null,
+      "handle": "one",
+      "password": "SorKVQWV",
+      "timezone": "UTC",
+      "subdomain": "one",
+      "primary_domain": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
+      "published": true,
+      "processed": true,
+      "created_at": 1720758022,
+      "updated_at": 1720758046
+    }
+  ],
+  "meta": {
+    "hasMore": false,
+    "currentPage": 1,
+    "from": 1,
+    "to": 1,
+    "perPage": 10,
+    "total": 1,
+    "lastPage": 1
+  }
+}
