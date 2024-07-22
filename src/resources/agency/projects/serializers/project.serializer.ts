@@ -4,9 +4,6 @@ import { deserializeDomain } from '../../domains/serializers'
 import type { Project, ProjectResponse } from '../interfaces'
 import type { List, ListResponse } from '@/types'
 
-import type { List, ListResponse } from '@/types'
-import type { Project, ProjectResponse } from '../interfaces'
-
 export const deserializeProject = (project: ProjectResponse): Project => ({
   id: project.id,
   object: project.object,
