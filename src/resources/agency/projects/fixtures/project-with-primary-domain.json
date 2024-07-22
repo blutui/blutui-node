@@ -1,0 +1,25 @@
+{
+  "id": "99bc147e-966c-4dd0-8def-de817c63cf41",
+  "object": "project",
+  "name": "One",
+  "description": "One",
+  "image": null,
+  "handle": "one",
+  "password": "SorKVQWV",
+  "timezone": "UTC",
+  "subdomain": "one",
+  "primary_domain": {
+    "id": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
+    "object": "domain",
+    "name": "example.com",
+    "token": "08Q8wwsDMIuCwAsudZtXgf3ABkAwqbExgUPWUEPEuMBoWUIH0ie81R27h2elqjk1",
+    "project": "9bf15409-db06-4c2c-b1ee-3a64c0074092",
+    "verified_at": null,
+    "created_at": 1716170007,
+    "updated_at": 1716170007
+  },
+  "published": true,
+  "processed": true,
+  "created_at": 1720758022,
+  "updated_at": 1720758046
+}
