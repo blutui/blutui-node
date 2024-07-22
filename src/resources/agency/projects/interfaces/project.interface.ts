@@ -1,3 +1,5 @@
+import type { Domain, DomainResponse } from '../../domains/interfaces'
+
 export interface Project {
   id: string
   object: 'project'
@@ -8,7 +10,7 @@ export interface Project {
   password: string
   timezone: string
   subdomain: string
-  primaryDomain: string | Record<string, unknown>
+  primaryDomain: string | null | Domain
   published: boolean
   processed: boolean
   createdAt: number
@@ -26,7 +28,7 @@ export interface ProjectResponse {
   password: string
   timezone: string
   subdomain: string
-  primary_domain: string | Record<string, unknown>
+  primary_domain: string | null | DomainResponse
   published: boolean
   processed: boolean
   created_at: number
