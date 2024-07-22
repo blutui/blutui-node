@@ -54,6 +54,7 @@ describe('Project', () => {
         id: '99bc147e-966c-4dd0-8def-de817c63cf41',
         object: 'project',
       })
+      expect(typeof project.primaryDomain).toBe('string')
     })
 
     it('can retrieve a project with an expanded primary domain', async () => {
