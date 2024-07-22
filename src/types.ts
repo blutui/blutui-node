@@ -3,7 +3,8 @@
 export interface BlutuiOptions {
   apiHostname?: string
   request?: {
-    fetch?: typeof fetch
+    // biome-ignore lint/suspicious/noExplicitAny: We want developers to be able to use node-fetch
+    fetch?: any
   }
 }
 

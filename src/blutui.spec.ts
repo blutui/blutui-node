@@ -47,6 +47,22 @@ describe('Blutui', () => {
       })
     })
 
+    describe('when access token and fetch function are provided to the constructor', () => {
+      it('initalizes', async () => {
+        // Example from JWT.io
+        const token =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+        expect(
+          () =>
+            new Blutui(token, {
+              request: {
+                fetch: fetch,
+              },
+            })
+        ).not.toThrow()
+      })
+    })
+
     describe('version', () => {
       it('matches the version in `package.json`', async () => {
         const blutui = new Blutui('eyJhbGciOi')

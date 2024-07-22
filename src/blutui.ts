@@ -53,12 +53,16 @@ export class Blutui {
 
     const useAgent: string = `blutui-node/${VERSION}`
 
-    this.client = new Client(this.baseURL, {
-      headers: {
-        Authorization: `Bearer ${this.accessToken}`,
-        'User-Agent': useAgent,
+    this.client = new Client(
+      this.baseURL,
+      {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+          'User-Agent': useAgent,
+        },
       },
-    })
+      options.request?.fetch
+    )
   }
 
   /**

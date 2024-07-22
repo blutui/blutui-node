@@ -3,10 +3,24 @@ import { FetchException } from '../exceptions'
 const API_VERSION = 'v1'
 
 export class Client {
+  private readonly _fetchFn
+
+  /**
+   * Create a new client instance.
+   */
   constructor(
     readonly baseURL: string,
-    readonly options?: RequestInit
-  ) {}
+    readonly options?: RequestInit,
+    fetchFn?: typeof fetch
+  ) {
+    this._fetchFn = fetchFn || globalThis.fetch
+
+    if (!this._fetchFn) {
+      throw new Error(
+        'Fetch function not defined in the global scope and no replacement was provided.'
+      )
+    }
+  }
 
   async get(
     path: string,
@@ -80,7 +94,7 @@ export class Client {
   }
 
   private async fetch(url: string, options?: RequestInit) {
-    const response = await fetch(url, {
+    const response = await this._fetchFn(url, {
       ...this.options,
       ...options,
       headers: {
