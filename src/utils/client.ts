@@ -125,7 +125,7 @@ function getQueryString(queryObj?: Record<string, unknown>) {
           sanitizedQueryObj.push([`${param}[]`, element])
       }
     } else if (value) {
-      sanitizedQueryObj.push([param, newValue])
+      sanitizedQueryObj.push([param, String(value)])
     }
   }
 
