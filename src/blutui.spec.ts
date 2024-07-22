@@ -47,7 +47,7 @@ describe('Blutui', () => {
       })
     })
 
-    describe('when access token and fetch functin are provided with constructor', () => {
+    describe('when access token and fetch function are provided to the constructor', () => {
       it('initalizes', async () => {
         // Example from JWT.io
         const token =
