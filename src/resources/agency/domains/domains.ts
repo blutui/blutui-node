@@ -66,7 +66,7 @@ export class Domains {
   /**
    * Update a domain for the current agency.
    *
-   * @param payload - The values to update the brand
+   * @param payload - The values to update the domain
    */
   async update(id: string, payload: UpdateDomainOptions): Promise<Domain> {
     const { data } = await this.agency.patch<
