@@ -25,7 +25,7 @@ export class Roles {
   constructor(private readonly agency: Agency) {}
 
   /**
-   * Get the roles list for the current agency.
+   * Get a list of roles for the current agency.
    */
   async list(options?: PaginationOptions): Promise<List<Role>> {
     const { data } = await this.agency.get<ListResponse<RoleResponse>>(
