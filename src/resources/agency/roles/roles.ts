@@ -72,7 +72,7 @@ export class Roles {
   }
 
   /**
-   * Remove a role for the current agency.
+   * Remove a role from the current agency.
    */
   async remove(id: string): Promise<DeletedResponse> {
     const { data } = await this.agency.delete<DeletedResponse>(`roles/${id}`)
