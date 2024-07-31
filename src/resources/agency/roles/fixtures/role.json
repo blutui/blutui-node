@@ -1,0 +1,12 @@
+{
+  "id": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
+  "object": "role",
+  "name": "Owner",
+  "description": "Owner of the domain",
+  "permissions": {
+    "user.read": true,
+    "user.write": false
+  },
+  "created_at": 1716170007,
+  "updated_at": 1716170007
+}
