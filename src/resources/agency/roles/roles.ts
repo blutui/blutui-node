@@ -58,7 +58,7 @@ export class Roles {
   }
 
   /**
-   * Update a rle for the current agency.
+   * Update a role in the current agency.
    *
    * @param payload - The values to update the role
    */
