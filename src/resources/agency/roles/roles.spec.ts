@@ -15,10 +15,10 @@ describe('Role', () => {
   describe('list', () => {
     it('can retrieve a list of roles', async () => {
       fetchOnce(roleListFixture)
-      const domains = await blutui.agency('foo').roles.list()
+      const roles = await blutui.agency('foo').roles.list()
 
       expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/roles`)
-      expect(domains).toMatchObject({
+      expect(roles).toMatchObject({
         object: 'list',
       })
     })

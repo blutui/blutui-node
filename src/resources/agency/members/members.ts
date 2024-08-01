@@ -1,6 +1,8 @@
+import { deserializeMemberList } from './serializers'
+
 import type { Agency } from '@/agency'
-import type { Member } from './interfaces'
-import type { List, PaginationOptions } from '@/types'
+import type { Member, MemberResponse } from './interfaces'
+import type { List, ListResponse, PaginationOptions } from '@/types'
 
 export class Members {
   constructor(private readonly agency: Agency) {}
@@ -9,6 +11,11 @@ export class Members {
    * Get a list of members for the current agency.
    */
   async list(options?: PaginationOptions): Promise<List<Member>> {
-    const {} = await this.agency.get('members', { query: options })
+    const { data } = await this.agency.get<ListResponse<MemberResponse>>(
+      'members',
+      { query: options }
+    )
+
+    return deserializeMemberList(data)
   }
 }
