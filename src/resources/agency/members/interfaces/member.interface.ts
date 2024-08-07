@@ -8,7 +8,7 @@ export interface Member {
   email: string
   twoFactorEnabled: boolean
   hasFullAccess: boolean
-  role: Role
+  role: Omit<Role, 'permissions'>
   createdAt: number
   updatedAt: number
 }
@@ -21,7 +21,7 @@ export interface MemberResponse {
   email: string
   two_factor_enabled: boolean
   has_full_access: boolean
-  role: RoleResponse
+  role: Omit<RoleResponse, 'permissions'>
   created_at: number
   updated_at: number
 }

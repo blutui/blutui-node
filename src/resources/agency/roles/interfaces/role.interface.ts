@@ -24,7 +24,7 @@ export interface Role {
   description: string
   isSuper: boolean
   usersCount?: number
-  permissions: { [key in Permission]: boolean }
+  permissions?: { [key in Permission]: boolean }
   createdAt: number
   updatedAt: number
 }
@@ -36,7 +36,7 @@ export interface RoleResponse {
   description: string
   is_super: boolean
   users_count?: number
-  permissions: { [key in Permission]: boolean }
+  permissions?: { [key in Permission]: boolean }
   created_at: number
   updated_at: number
 }
