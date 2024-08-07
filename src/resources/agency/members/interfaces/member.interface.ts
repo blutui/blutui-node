@@ -4,7 +4,7 @@ export interface Member {
   id: string
   object: 'member'
   name: string
-  avatarUrl: string | null
+  avatar: string | null
   email: string
   twoFactorEnabled: boolean
   hasFullAccess: boolean
@@ -17,7 +17,7 @@ export interface MemberResponse {
   id: string
   object: 'member'
   name: string
-  avatar_url: string | null
+  avatar: string | null
   email: string
   two_factor_enabled: boolean
   has_full_access: boolean

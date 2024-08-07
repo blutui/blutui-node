@@ -16,7 +16,7 @@ export class Agency {
   ) {}
 
   async get<Result>(path: string, options: GetOptions = {}) {
-    return this.blutui.get<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.get<Result>(this.getAgencyPath(path), options)
   }
 
   async post<Result, Entity>(
@@ -24,7 +24,7 @@ export class Agency {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return this.blutui.post<Result, Entity>(
+    return await this.blutui.post<Result, Entity>(
       this.getAgencyPath(path),
       entity,
       options
@@ -36,7 +36,7 @@ export class Agency {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return this.blutui.patch<Result, Entity>(
+    return await this.blutui.patch<Result, Entity>(
       this.getAgencyPath(path),
       entity,
       options
@@ -44,7 +44,7 @@ export class Agency {
   }
 
   async delete<Result>(path: string, options: PostOptions = {}) {
-    return this.blutui.delete<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.delete<Result>(this.getAgencyPath(path), options)
   }
 
   /**

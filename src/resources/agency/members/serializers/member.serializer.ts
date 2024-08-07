@@ -8,7 +8,7 @@ export const deserializeMember = (member: MemberResponse): Member => ({
   id: member.id,
   object: member.object,
   name: member.name,
-  avatarUrl: member.avatar_url,
+  avatar: member.avatar,
   email: member.email,
   twoFactorEnabled: member.two_factor_enabled,
   hasFullAccess: member.has_full_access,

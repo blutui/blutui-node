@@ -1,6 +1,6 @@
 import { Agency } from './agency'
 import {
-  type FetchException,
+  FetchException,
   GenericServerException,
   NoAccessTokenProvidedException,
   NotFoundException,
@@ -122,7 +122,7 @@ export class Blutui {
     options: PatchOptions = {}
   ): Promise<{ data: Result }> {
     try {
-      return this.client.patch<Entity>(path, entity, {
+      return await this.client.patch<Entity>(path, entity, {
         params: options.query,
       })
     } catch (error) {
@@ -148,6 +148,10 @@ export class Blutui {
   }
 
   private handleFetchError({ path, error }: { path: string; error: unknown }) {
+    if (!(error instanceof FetchException)) {
+      throw new Error(`Unexpected error: ${error}`)
+    }
+
     const { response } = error as FetchException<BlutuiResponseError>
 
     if (response) {
