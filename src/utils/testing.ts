@@ -15,6 +15,10 @@ export function fetchURL() {
   return fetch.mock.calls[0][0]
 }
 
+export function fetchSearchParams() {
+  return Object.fromEntries(new URL(String(fetchURL())).searchParams)
+}
+
 export function fetchHeaders() {
   return fetch.mock.calls[0][1]?.headers
 }

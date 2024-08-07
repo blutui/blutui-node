@@ -1,8 +1,8 @@
 import { deserializePaginationMeta } from '@/utils/serializers'
+import { deserializeProject } from '../../projects/serializers'
 
 import type { List, ListResponse } from '@/types'
 import type { Domain, DomainResponse } from '../interfaces'
-import { deserializeProject } from '../../projects/serializers'
 
 export const deserializeDomain = (domain: DomainResponse): Domain => ({
   id: domain.id,

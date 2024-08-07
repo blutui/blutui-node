@@ -1,4 +1,4 @@
-import { Brand, Domains, Projects, Roles } from './resources/agency'
+import { Brand, Domains, Members, Projects, Roles } from './resources/agency'
 
 import type { Blutui } from './blutui'
 import type { GetOptions, PostOptions } from './types'
@@ -6,6 +6,7 @@ import type { GetOptions, PostOptions } from './types'
 export class Agency {
   readonly brand = new Brand(this)
   readonly domains = new Domains(this)
+  readonly members = new Members(this)
   readonly projects = new Projects(this)
   readonly roles = new Roles(this)
 
@@ -15,7 +16,7 @@ export class Agency {
   ) {}
 
   async get<Result>(path: string, options: GetOptions = {}) {
-    return this.blutui.get<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.get<Result>(this.getAgencyPath(path), options)
   }
 
   async post<Result, Entity>(
@@ -23,7 +24,7 @@ export class Agency {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return this.blutui.post<Result, Entity>(
+    return await this.blutui.post<Result, Entity>(
       this.getAgencyPath(path),
       entity,
       options
@@ -35,7 +36,7 @@ export class Agency {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return this.blutui.patch<Result, Entity>(
+    return await this.blutui.patch<Result, Entity>(
       this.getAgencyPath(path),
       entity,
       options
@@ -43,7 +44,7 @@ export class Agency {
   }
 
   async delete<Result>(path: string, options: PostOptions = {}) {
-    return this.blutui.delete<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.delete<Result>(this.getAgencyPath(path), options)
   }
 
   /**

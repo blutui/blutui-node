@@ -9,35 +9,12 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    name: Lint
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Run lint
-        run: |
-          npm run lint
-
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node: [18, 20]
+        node: [18, 20, 22]
 
     name: Node ${{ matrix.node }}
 
@@ -54,6 +31,10 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+
+      - name: Lint
+        run: |
+          npm run lint
 
       - name: Run tests
         run: |
