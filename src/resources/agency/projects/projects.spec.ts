@@ -218,7 +218,7 @@ describe('Project', () => {
       })
     })
 
-    it('can search for projects using expan', async () => {
+    it('can search for projects using expand', async () => {
       fetchOnce(projectListFixture)
       const projects = await blutui
         .agency('foo')
