@@ -1,6 +1,6 @@
 import fetch from 'jest-fetch-mock'
 import { Blutui } from '@/blutui'
-import { fetchOnce, fetchURL } from '@/utils/testing'
+import { fetchOnce, fetchSearchParams, fetchURL } from '@/utils/testing'
 
 import projectFixture from './fixtures/project.json'
 import projectWithPrimaryDomainFixture from './fixtures/project-with-primary-domain.json'
@@ -192,6 +192,48 @@ describe('Project', () => {
       expect(fetchURL()).toBe(
         `${blutui.baseURL}/v1/agencies/foo/projects/search`
       )
+      expect(projects).toMatchObject({
+        object: 'list',
+      })
+    })
+
+    it('can search for projects using pagination', async () => {
+      fetchOnce(projectListFixture)
+      const projects = await blutui
+        .agency('foo')
+        .projects.search({ name: 'One' }, { page: 2, limit: 10 })
+
+      expect(fetchURL()).toBe(
+        encodeURI(
+          `${blutui.baseURL}/v1/agencies/foo/projects/search?page=2&limit=10`
+        )
+      )
+      expect(fetchSearchParams()).toMatchObject({
+        page: '2',
+        limit: '10',
+      })
+
+      expect(projects).toMatchObject({
+        object: 'list',
+      })
+    })
+
+    it('can search for projects using expand', async () => {
+      fetchOnce(projectListFixture)
+      const projects = await blutui
+        .agency('foo')
+        .projects.search({ name: 'One' }, { expand: ['primary_domain'] })
+
+      expect(fetchURL()).toBe(
+        encodeURI(
+          `${blutui.baseURL}/v1/agencies/foo/projects/search?expand[]=primary_domain`
+        )
+      )
+
+      expect(fetchSearchParams()).toMatchObject({
+        'expand[]': 'primary_domain',
+      })
+
       expect(projects).toMatchObject({
         object: 'list',
       })

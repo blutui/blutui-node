@@ -135,7 +135,7 @@ export class Projects {
    */
   async search(
     payload: SearchProjectOptions,
-    options?: Expandable<'primary_domain'>
+    options?: PaginationOptions & Expandable<'primary_domain'>
   ): Promise<List<Project>> {
     const { data } = await this.agency.post<
       ListResponse<ProjectResponse>,
