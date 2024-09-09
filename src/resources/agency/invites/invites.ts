@@ -1,8 +1,22 @@
-import { deserializeInviteList } from './serializers'
+import {
+  deserializeInvite,
+  deserializeInviteList,
+  serializeUpdateInviteOptions,
+} from './serializers'
 
 import type { Agency } from '@/agency'
-import type { Invite, InviteResponse } from './interfaces'
-import type { List, ListResponse, PaginationOptions } from '@/types'
+import type {
+  Invite,
+  InviteResponse,
+  SerializedUpdateInviteOptions,
+  UpdateInviteOptions,
+} from './interfaces'
+import type {
+  DeletedResponse,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
 
 export class Invites {
   constructor(private readonly agency: Agency) {}
@@ -19,5 +33,26 @@ export class Invites {
     )
 
     return deserializeInviteList(data)
+  }
+
+  /**
+   * Update a invite in the current agency.
+   */
+  async update(id: string, payload: UpdateInviteOptions): Promise<Invite> {
+    const { data } = await this.agency.patch<
+      InviteResponse,
+      SerializedUpdateInviteOptions
+    >(`invites/${id}`, serializeUpdateInviteOptions(payload))
+
+    return deserializeInvite(data)
+  }
+
+  /**
+   * Remove a invite from the current agency.
+   */
+  async remove(id: string): Promise<DeletedResponse> {
+    const { data } = await this.agency.delete<DeletedResponse>(`invites/${id}`)
+
+    return data
   }
 }

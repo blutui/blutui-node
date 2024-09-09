@@ -70,7 +70,7 @@ describe('Role', () => {
   })
 
   describe('remove', () => {
-    it('can remove an role', async () => {
+    it('can remove a role', async () => {
       fetchOnce(roleFixture)
       await blutui.agency('foo').roles.remove(roleFixture.id)
 

@@ -2,7 +2,7 @@ import fetch from 'jest-fetch-mock'
 import { Blutui } from '@/blutui'
 import { fetchOnce, fetchURL } from '@/utils/testing'
 
-// import inviteFixture from './fixtures/invite.json'
+import inviteFixture from './fixtures/invite.json'
 import inviteListFixture from './fixtures/invite-list.json'
 
 const accessToken =
@@ -21,6 +21,33 @@ describe('Invite', () => {
       expect(invites).toMatchObject({
         object: 'list',
       })
+    })
+  })
+
+  describe('update', () => {
+    it('can update an agency invite', async () => {
+      fetchOnce(inviteFixture)
+      const invite = await blutui
+        .agency('foo')
+        .invites.update(inviteFixture.id, { role: 3 })
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/invites/${inviteFixture.id}`
+      )
+      expect(invite).toMatchObject({
+        object: 'invite',
+      })
+    })
+  })
+
+  describe('remove', () => {
+    it('can remove an invite', async () => {
+      fetchOnce(inviteFixture)
+      await blutui.agency('foo').invites.remove(inviteFixture.id)
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/invites/${inviteFixture.id}`
+      )
     })
   })
 })
