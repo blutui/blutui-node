@@ -1,0 +1,17 @@
+{
+  "object": "list",
+  "data": [
+    {
+
+    }
+  ],
+  "meta": {
+    "hasMore": false,
+    "currentPage": 1,
+    "from": 1,
+    "to": 1,
+    "perPage": 10,
+    "total": 1,
+    "lastPage": 1
+  }
+}
