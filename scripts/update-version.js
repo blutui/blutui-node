@@ -4,6 +4,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 
 const packageJsonPath = path.join(__dirname, '..', 'package.json')
+const blutuiPath = path.join(__dirname, '..', 'src', 'blutui.ts')
 
 // Get the current version from package.json
 function getPackageJsonVersion() {
@@ -35,6 +36,26 @@ function bumpVersion(currentVersion, type) {
   return versionParts.join('.')
 }
 
+// Update the package.json version
+function updatePackageJsonVersion(newVersion) {
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
+  packageJson.version = newVersion
+  fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`)
+}
+
+// Update VERSION constant in blutui.ts
+function updateBlutuiVersion(newVersion) {
+  let blutuiContent = fs.readFileSync(blutuiPath, 'utf-8')
+  const versionRegex = /const VERSION = '([0-9]+\.[0-9]+\.[0-9]+)'/
+
+  blutuiContent = blutuiContent.replace(
+    versionRegex,
+    `const VERSION = '${newVersion}'`
+  )
+
+  fs.writeFileSync(blutuiPath, blutuiContent)
+}
+
 // The main function
 function main() {
   const args = process.argv.slice(2)
@@ -48,7 +69,10 @@ function main() {
   const currentVersion = getPackageJsonVersion()
   const newVersion = bumpVersion(currentVersion, args[0])
 
-  console.log(currentVersion, newVersion)
+  updatePackageJsonVersion(newVersion)
+  updateBlutuiVersion(newVersion)
+
+  console.log(`Version updated to ${newVersion}`)
 }
 
 main()
