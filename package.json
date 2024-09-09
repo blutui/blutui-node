@@ -25,6 +25,7 @@
     "test": "jest",
     "lint": "biome lint --error-on-warnings ./src",
     "format": "biome format --write ./src",
+    "update-version": "node scripts/update-version.js",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
@@ -55,6 +56,6 @@
     "node": ">=18"
   },
   "volta": {
-    "node": "20.12.2"
+    "node": "20.16.0"
   }
 }
