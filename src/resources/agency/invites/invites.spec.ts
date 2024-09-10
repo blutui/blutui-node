@@ -22,6 +22,24 @@ describe('Invite', () => {
         object: 'list',
       })
     })
+
+    it('can retrieve a list of invites with an expanded role', async () => {
+      fetchOnce(inviteListFixture)
+      const invites = await blutui
+        .agency('foo')
+        .invites.list({ expand: ['role'] })
+
+      expect(fetchURL()).toBe(
+        encodeURI(`${blutui.baseURL}/v1/agencies/foo/invites?expand[]=role`)
+      )
+
+      expect(invites).toMatchObject({
+        object: 'list',
+      })
+      expect(invites.data[0].role).toMatchObject({
+        object: 'role',
+      })
+    })
   })
 
   describe('update', () => {

@@ -13,6 +13,7 @@ import type {
 } from './interfaces'
 import type {
   DeletedResponse,
+  Expandable,
   List,
   ListResponse,
   PaginationOptions,
@@ -24,7 +25,9 @@ export class Invites {
   /**
    * Get a list of invites for the current agency.
    */
-  async list(options?: PaginationOptions): Promise<List<Invite>> {
+  async list(
+    options?: PaginationOptions & Expandable<'role'>
+  ): Promise<List<Invite>> {
     const { data } = await this.agency.get<ListResponse<InviteResponse>>(
       'invites',
       {
