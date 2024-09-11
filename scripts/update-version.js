@@ -72,7 +72,7 @@ function main() {
   updatePackageJsonVersion(newVersion)
   updateBlutuiVersion(newVersion)
 
-  console.log(`Version updated from ${$currentVersion} to ${newVersion}`)
+  console.log(`Version updated from ${currentVersion} to ${newVersion}`)
 }
 
 main()
