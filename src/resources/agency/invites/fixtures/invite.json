@@ -1,0 +1,16 @@
+{
+  "id": "9cf6c82a-a457-4787-8aad-81ce8ddf3235",
+  "object": "invite",
+  "email": "mara@blutui.dev",
+  "role": {
+    "id": 3,
+    "object": "role",
+    "name": "Developer",
+    "description": "The frontend developer role",
+    "is_super": false,
+    "created_at": 1690330767,
+    "updated_at": 1721869652
+  },
+  "created_at": 1725837341,
+  "updated_at": 1725917399
+}
