@@ -7,9 +7,15 @@ updates:
     # Check for updates daily
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: "chore"
+      include: "scope"
 
   # Enable version updates for Github Actions
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: "chore"
+      include: "scope"
