@@ -21,7 +21,7 @@ export const deserializeDomain = (domain: DomainResponse): Domain => ({
 export const deserializeDomainList = (
   domains: ListResponse<DomainResponse>
 ): List<Domain> => ({
-  object: 'list',
+  object: domains.object,
   data: domains.data.map(deserializeDomain),
   meta: deserializePaginationMeta(domains.meta),
 })

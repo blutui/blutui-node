@@ -1,6 +1,8 @@
 import { deserializeProject } from '../../projects/serializers'
 
+import type { List, ListResponse } from '@/types'
 import type { Cassette, CassetteResponse } from '../interfaces'
+import { deserializePaginationMeta } from '@/utils/serializers'
 
 export const deserializeCassette = (cassette: CassetteResponse): Cassette => ({
   id: cassette.id,
@@ -17,4 +19,12 @@ export const deserializeCassette = (cassette: CassetteResponse): Cassette => ({
       : cassette.parent,
   createdAt: cassette.created_at,
   updatedAt: cassette.updated_at,
+})
+
+export const deserializeCassetteList = (
+  cassettes: ListResponse<CassetteResponse>
+): List<Cassette> => ({
+  object: cassettes.object,
+  data: cassettes.data.map(deserializeCassette),
+  meta: deserializePaginationMeta(cassettes.meta),
 })
