@@ -22,6 +22,9 @@ export class Client {
     }
   }
 
+  /**
+   * Perform a `GET` request to the given path.
+   */
   async get(
     path: string,
     options: { params?: Record<string, unknown>; headers?: HeadersInit }
@@ -32,6 +35,9 @@ export class Client {
     })
   }
 
+  /**
+   * Perform a `POST` request to the given path with the given payload.
+   */
   async post<Entity>(
     path: string,
     entity: Entity,
@@ -46,6 +52,9 @@ export class Client {
     })
   }
 
+  /**
+   * Perform a `PATCH` request to the given path with the given payload.
+   */
   async patch<Entity>(
     path: string,
     entity: Entity,
@@ -60,6 +69,9 @@ export class Client {
     })
   }
 
+  /**
+   * Perform a `DELETE` request to the given path.
+   */
   async delete(
     path: string,
     options: { params?: Record<string, unknown>; headers?: HeadersInit }
@@ -72,6 +84,9 @@ export class Client {
     })
   }
 
+  /**
+   * Get the resource URL for the given path.
+   */
   private getResourceURL(path: string, params?: Record<string, unknown>) {
     const queryString = getQueryString(params)
     const url = new URL(
@@ -93,6 +108,9 @@ export class Client {
     return `${version}/${newPath}`
   }
 
+  /**
+   * Perform a request with the given options.
+   */
   private async fetch(url: string, options?: RequestInit) {
     const response = await this._fetchFn(url, {
       ...this.options,
@@ -127,6 +145,9 @@ export class Client {
   }
 }
 
+/**
+ * Get the query string.
+ */
 function getQueryString(queryObj?: Record<string, unknown>) {
   if (!queryObj) return undefined
 
@@ -146,6 +167,9 @@ function getQueryString(queryObj?: Record<string, unknown>) {
   return new URLSearchParams(sanitizedQueryObj).toString()
 }
 
+/**
+ * Get the body as a JSON string.
+ */
 function getBody<Entity>(entity: Entity): BodyInit | null | undefined {
   return JSON.stringify(entity)
 }
