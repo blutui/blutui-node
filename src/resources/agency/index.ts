@@ -1,4 +1,5 @@
 export { Brand } from './brand/brand'
+export { Cassettes } from './cassettes/cassettes'
 export { Domains } from './domains/domains'
 export { Invites } from './invites/invites'
 export { Members } from './members/members'
