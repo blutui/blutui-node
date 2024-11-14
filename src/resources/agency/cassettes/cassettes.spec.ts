@@ -26,4 +26,76 @@ describe('Cassette', () => {
       })
     })
   })
+
+  describe('create', () => {
+    it('can create a new cassette', async () => {
+      fetchOnce(cassetteFixture)
+      const cassette = await blutui.agency('foo').cassettes.create({
+        handle: 'default',
+        name: 'Default',
+        project: 'project-id',
+      })
+
+      expect(fetchURL()).toBe(`${blutui.baseURL}/v1/agencies/foo/cassettes`)
+      expect(cassette).toMatchObject({
+        object: 'cassette',
+        name: 'Default',
+      })
+    })
+  })
+
+  describe('update', () => {
+    it('can update an existing cassette', async () => {
+      fetchOnce(cassetteFixture)
+      const cassette = await blutui
+        .agency('foo')
+        .cassettes.update(cassetteFixture.id, {
+          name: 'Default',
+        })
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/cassettes/${cassetteFixture.id}`
+      )
+      expect(cassette).toMatchObject({
+        object: 'cassette',
+        name: 'Default',
+      })
+    })
+  })
+
+  describe('remove', () => {
+    it('can remove a cassette', async () => {
+      fetchOnce({ id: cassetteFixture.id, object: 'cassette', deleted: true })
+      const cassette = await blutui
+        .agency('foo')
+        .cassettes.remove(cassetteFixture.id)
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/cassettes/${cassetteFixture.id}`
+      )
+      expect(cassette).toMatchObject({
+        object: 'cassette',
+        deleted: true,
+      })
+    })
+  })
+
+  describe('duplicate', () => {
+    it('can duplicate an existing cassette', async () => {
+      fetchOnce(cassetteFixture)
+      const cassette = await blutui
+        .agency('foo')
+        .cassettes.duplicate(cassetteFixture.id, {
+          name: 'Default',
+          handle: 'default',
+        })
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/cassettes/${cassetteFixture.id}/duplicate`
+      )
+      expect(cassette).toMatchObject({
+        object: 'cassette',
+      })
+    })
+  })
 })
