@@ -25,22 +25,5 @@ jobs:
         with:
           commit_message: "Update version to v${{ github.ref_name }}"
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Clean install dependencies
-        run: |
-          npm ci
-
-      - name: Run tests
-        run: |
-          npm run test
-
-      - name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm publish
+      - name: Push changes
+        run: git push
