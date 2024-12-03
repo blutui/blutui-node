@@ -1,6 +1,6 @@
 {
   "name": "blutui",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Node.js library for the Blutui API",
   "license": "MIT",
   "keywords": [
