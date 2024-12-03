@@ -18,6 +18,7 @@ import type {
   UpdateProjectOptions,
 } from './interfaces'
 import type { Domain, DomainResponse } from '../domains/interfaces'
+import type { Cassette, CassetteResponse } from '../cassettes/interfaces'
 import type {
   DeletedResponse,
   Expandable,
@@ -25,6 +26,7 @@ import type {
   ListResponse,
   PaginationOptions,
 } from '@/types'
+import { deserializeCassetteList } from '../cassettes/serializers'
 
 export class Projects {
   constructor(private readonly agency: Agency) {}
@@ -128,6 +130,21 @@ export class Projects {
     )
 
     return deserializeDomainList(data)
+  }
+
+  /**
+   * Retrieve the Cassettes for a project in your agency.
+   */
+  async cassettes(
+    id: string,
+    options?: PaginationOptions
+  ): Promise<List<Cassette>> {
+    const { data } = await this.agency.get<ListResponse<CassetteResponse>>(
+      `projects/${id}/cassettes`,
+      { query: options }
+    )
+
+    return deserializeCassetteList(data)
   }
 
   /**

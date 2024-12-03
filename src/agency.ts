@@ -1,5 +1,6 @@
 import {
   Brand,
+  Cassettes,
   Domains,
   Invites,
   Members,
@@ -12,6 +13,7 @@ import type { GetOptions, PostOptions } from './types'
 
 export class Agency {
   readonly brand = new Brand(this)
+  readonly cassettes = new Cassettes(this)
   readonly domains = new Domains(this)
   readonly invites = new Invites(this)
   readonly members = new Members(this)

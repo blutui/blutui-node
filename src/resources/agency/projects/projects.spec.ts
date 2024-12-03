@@ -6,6 +6,7 @@ import projectFixture from './fixtures/project.json'
 import projectWithPrimaryDomainFixture from './fixtures/project-with-primary-domain.json'
 import projectListFixture from './fixtures/project-list.json'
 import domainListFixture from '../domains/fixtures/domain-list.json'
+import cassetteListFixture from '../cassettes/fixtures/cassette-list.json'
 
 const accessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
@@ -177,6 +178,22 @@ describe('Project', () => {
         `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/domains`
       )
       expect(domains).toMatchObject({
+        object: 'list',
+      })
+    })
+  })
+
+  describe('cassettes', () => {
+    it('can retrieve a list of cassettes for a project', async () => {
+      fetchOnce(cassetteListFixture)
+      const cassettes = await blutui
+        .agency('foo')
+        .projects.cassettes(projectFixture.id)
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/cassettes`
+      )
+      expect(cassettes).toMatchObject({
         object: 'list',
       })
     })
