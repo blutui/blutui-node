@@ -14,6 +14,14 @@ jobs:
     name: Publish to NPM
 
     steps:
+      - name: Update blutui.ts version
+        run: sed -i "s/const VERSION = '.*';/const VERSION = '${{ github.ref_name }}';/g" src/blutui.ts
+
+      - name: Commit version change
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update version to v${{ github.ref_name }}"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
