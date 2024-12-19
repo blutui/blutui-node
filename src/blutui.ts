@@ -1,4 +1,5 @@
 import { Agency } from './agency'
+import { Project } from './project'
 import {
   FetchException,
   GenericServerException,
@@ -29,6 +30,7 @@ export class Blutui {
   readonly baseURL: string
   private readonly client: Client
   private readonly _agencies: Record<string, Agency> = {}
+  private readonly _projects: Record<string, Project> = {}
 
   readonly agencies = new Agencies(this)
   readonly user = new User(this)
@@ -83,6 +85,19 @@ export class Blutui {
     }
 
     return this._agencies[username]
+  }
+
+  /**
+   * Get a Blutui Project instance for the given agency.
+   *
+   * @param handle - The project's handle, if the handle is different as the project's subdomain, should pass the subdomain
+   */
+  project(handle: string): Project {
+    if (!this._projects[handle]) {
+      this._projects[handle] = new Project(handle, this)
+    }
+
+    return this._projects[handle]
   }
 
   async get<Result>(
