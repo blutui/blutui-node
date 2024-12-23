@@ -30,7 +30,9 @@ describe('Menu', () => {
       fetchOnce(menuFixture)
       const menu = await blutui.project('foo').menus.get(menuFixture.id)
 
-      expect(fetchURL()).toBe(`https://foo.blutui.com/api/menus/${menuFixture.id}`)
+      expect(fetchURL()).toBe(
+        `https://foo.blutui.com/api/menus/${menuFixture.id}`
+      )
 
       expect(menu).toMatchObject({
         object: 'menu',
@@ -54,7 +56,6 @@ describe('Menu', () => {
         object: 'menu',
       })
 
-      // menu.items is an array of objects
       expect(menu.items).toMatchObject([
         {
           object: 'menu_item',
