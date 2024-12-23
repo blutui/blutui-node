@@ -18,7 +18,7 @@ describe('Menu', () => {
       fetchOnce(menuListFixture)
       const menus = await blutui.project('foo').menus.list()
 
-      expect(fetchURL()).toBe(`https://foo.blutui.com/api/menus`)
+      expect(fetchURL()).toBe('https://foo.blutui.com/api/menus')
       expect(menus).toMatchObject({
         object: 'list',
       })
