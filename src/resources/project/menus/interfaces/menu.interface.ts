@@ -2,7 +2,7 @@ export interface Menu {
   id: string
   object: 'menu'
   name: string
-  items: MenuItem[]
+  items?: MenuItem[]
   createdAt: number
   updatedAt: number
 }
@@ -11,7 +11,7 @@ export interface MenuResponse {
   id: string
   object: 'menu'
   name: string
-  items: MenuItemResponse[]
+  items?: MenuItemResponse[]
   created_at: number
   updated_at: number
 }
@@ -24,7 +24,7 @@ export interface MenuItem {
   active: boolean
   isNewTab: boolean
   order: number
-  items: MenuItem[]
+  items?: MenuItem[]
   createdAt: number
   updatedAt: number
 }
@@ -37,7 +37,7 @@ export interface MenuItemResponse {
   active: boolean
   is_new_tab: boolean
   order: number
-  items: MenuItemResponse[]
+  items?: MenuItemResponse[]
   created_at: number
   updated_at: number
 }

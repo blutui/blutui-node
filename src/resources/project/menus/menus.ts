@@ -1,13 +1,15 @@
 import type { Project } from '@/project'
-import type { List, ListResponse, PaginationOptions } from '@/types'
+import type { Expandable, List, ListResponse, PaginationOptions } from '@/types'
+import type { Menu, MenuResponse } from './interfaces'
+import { deserializeMenu, deserializeMenuList } from './serializers'
 
 export class Menus {
   constructor(private readonly project: Project) {}
 
-   /**
+  /**
    * Get the menu list for the current project.
    */
-   async list(options?: PaginationOptions): Promise<List<Menu>> {
+  async list(options?: PaginationOptions): Promise<List<Menu>> {
     const { data } = await this.project.get<ListResponse<MenuResponse>>(
       'menus',
       { query: options }
@@ -19,14 +21,13 @@ export class Menus {
   /**
    * Get a domain's information by ID.
    */
-  async get(id: string, options?: Expandable<'project'>): Promise<Domain> {
-    const { data } = await this.agency.get<DomainResponse>(`domains/${id}`, {
+  async get(id: string, options?: Expandable<'items'>): Promise<Menu> {
+    const { data } = await this.project.get<MenuResponse>(`menus/${id}`, {
       query: options,
     })
 
-    return deserializeDomain(data)
+    return deserializeMenu(data)
   }
-
 
   // /**
   //  * Create a new brand for the current agency.

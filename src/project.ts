@@ -1,12 +1,10 @@
-import {
-  Menu
-} from './resources/project'
+import { Menus } from './resources/project'
 
 import type { Blutui } from './blutui'
 import type { GetOptions, PostOptions } from './types'
 
 export class Project {
-  readonly menu = new Menu(this)
+  readonly menus = new Menus(this)
 
   constructor(
     public handle: string,
@@ -14,7 +12,7 @@ export class Project {
   ) {}
 
   async get<Result>(path: string, options: GetOptions = {}) {
-    return await this.blutui.get<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.get<Result>(this.getProjectPath(path), options)
   }
 
   async post<Result, Entity>(
@@ -23,7 +21,7 @@ export class Project {
     options: PostOptions = {}
   ) {
     return await this.blutui.post<Result, Entity>(
-      this.getAgencyPath(path),
+      this.getProjectPath(path),
       entity,
       options
     )
@@ -35,22 +33,22 @@ export class Project {
     options: PostOptions = {}
   ) {
     return await this.blutui.patch<Result, Entity>(
-      this.getAgencyPath(path),
+      this.getProjectPath(path),
       entity,
       options
     )
   }
 
   async delete<Result>(path: string, options: PostOptions = {}) {
-    return await this.blutui.delete<Result>(this.getAgencyPath(path), options)
+    return await this.blutui.delete<Result>(this.getProjectPath(path), options)
   }
 
   /**
    * Get the path for the current agency.
    */
-  private getAgencyPath(path: string): string {
+  private getProjectPath(path: string): string {
     const newPath = path.startsWith('/') ? path.replace('/', '') : path
 
-    return `/agencies/${this.username}/${newPath}`
+    return `https://${this.handle}.blutui.com/api/${newPath}`
   }
 }
