@@ -1,15 +1,14 @@
 import { Menus } from './resources/project'
 
 import type { Blutui } from './blutui'
-import { Admin } from './admin'
 import type { GetOptions, PostOptions } from './types'
+import type { Project } from './project'
 
-export class Project {
-  readonly admin = new Admin(this, this.blutui)
+export class Admin {
   readonly menus = new Menus(this)
 
   constructor(
-    public handle: string,
+    private readonly project: Project,
     private readonly blutui: Blutui
   ) {}
 
@@ -50,7 +49,6 @@ export class Project {
    */
   private getProjectPath(path: string): string {
     const newPath = path.startsWith('/') ? path.replace('/', '') : path
-
-    return `https://${this.handle}.blutui.com/api/${newPath}`
+    return `https://${this.project.handle}.blutui.com/admin/api/${newPath}`
   }
 }

@@ -2,9 +2,10 @@ import type { Project } from '@/project'
 import type { Expandable, List, ListResponse, PaginationOptions } from '@/types'
 import type { Menu, MenuResponse } from './interfaces'
 import { deserializeMenu, deserializeMenuList } from './serializers'
+import type { Admin } from '@/admin'
 
 export class Menus {
-  constructor(private readonly project: Project) {}
+  constructor(private readonly project: Project | Admin) {}
 
   /**
    * Get the menu list for the current project.
@@ -29,19 +30,19 @@ export class Menus {
     return deserializeMenu(data)
   }
 
-  // /**
-  //  * Create a new brand for the current agency.
-  //  *
-  //  * @param payload - The values to create the brand
-  //  */
-  // async create(payload: CreateBrandOptions): Promise<BrandI> {
-  //   const { data } = await this.agency.post<
-  //     BrandResponse,
-  //     SerializedCreateBrandOptions
-  //   >('brand', serializeCreateBrandOptions(payload))
+  /**
+   * Create a new brand for the current agency.
+   *
+   * @param payload - The values to create the brand
+   */
+  async create(payload: CreateMenuOptions): Promise<Menu> {
+    const { data } = await this.project.post<
+      MenuResponse,
+      SerializedCreateMenuOptions
+    >('menus', serializeCreateMenuOptions(payload))
 
-  //   return deserializeBrand(data)
-  // }
+    return deserializeMenu(data)
+  }
 
   // /**
   //  * Update the brand for the current agency.

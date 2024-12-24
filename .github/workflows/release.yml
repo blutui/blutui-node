@@ -17,13 +17,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Update blutui.ts version
-        run: sed -i "s/const VERSION = '.*';/const VERSION = '${{ github.ref_name }}';/g" src/blutui.ts
-
-      - name: Commit version change
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          commit_message: "Update version to v${{ github.ref_name }}"
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Push changes
-        run: git push
+      - name: Clean install dependencies
+        run: |
+          npm ci
+
+      - name: Run tests
+        run: |
+          npm run test
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish
