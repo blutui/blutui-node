@@ -1,7 +1,16 @@
 import type { Project } from '@/project'
 import type { Expandable, List, ListResponse, PaginationOptions } from '@/types'
-import type { Menu, MenuResponse } from './interfaces'
-import { deserializeMenu, deserializeMenuList } from './serializers'
+import type {
+  Menu,
+  MenuResponse,
+  CreateMenuOptions,
+  SerializedCreateMenuOptions,
+} from './interfaces'
+import {
+  deserializeMenu,
+  deserializeMenuList,
+  serializeCreateMenuOptions,
+} from './serializers'
 import type { Admin } from '@/admin'
 
 export class Menus {

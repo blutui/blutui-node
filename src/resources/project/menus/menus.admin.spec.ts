@@ -70,12 +70,43 @@ describe('Menu', () => {
     it('can create a new menu', async () => {
       fetchOnce(menuFixture)
       const menu = await blutui.project('foo').admin.menus.create({
-        name: 'Main Menu',
+        name: 'Primary Menu',
+        handle: 'primary-menu',
       })
 
       expect(fetchURL()).toBe('https://foo.blutui.com/admin/api/menus')
       expect(menu).toMatchObject({
         object: 'menu',
+      })
+    })
+
+    it('can create a new menu with items', async () => {
+      fetchOnce(menuWithItemsFixture)
+      const menu = await blutui.project('foo').admin.menus.create({
+        name: 'Primary Menu',
+        handle: 'primary-menu',
+        items: [
+          {
+            label: 'Contact',
+            url: '/contact',
+            is_new_tab: false,
+            active: true,
+          },
+        ],
+      })
+
+      expect(fetchURL()).toBe('https://foo.blutui.com/admin/api/menus')
+      expect(menu).toMatchObject({
+        object: 'menu',
+        items: [
+          {
+            object: 'menu_item',
+            label: 'Contact',
+            url: '/contact',
+            isNewTab: false,
+            active: true,
+          },
+        ],
       })
     })
   })

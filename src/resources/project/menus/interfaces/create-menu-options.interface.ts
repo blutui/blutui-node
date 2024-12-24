@@ -7,7 +7,7 @@ export interface CreateMenuOptions {
 export interface SerializedCreateMenuOptions {
   handle: string
   name: string
-  items?: string | null
+  items?: CreateMenuItemOptions[]
 }
 
 export interface CreateMenuItemOptions {
