@@ -1,0 +1,21 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
+      "object": "menu",
+      "name": "Primary Menu",
+      "created_at": 1716170007,
+      "updated_at": 1716170007
+    }
+  ],
+  "meta": {
+    "hasMore": false,
+    "currentPage": 1,
+    "from": 1,
+    "to": 1,
+    "perPage": 10,
+    "total": 1,
+    "lastPage": 1
+  }
+}

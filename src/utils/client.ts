@@ -90,7 +90,12 @@ export class Client {
   private getResourceURL(path: string, params?: Record<string, unknown>) {
     const queryString = getQueryString(params)
     const url = new URL(
-      [this.pathUsingVersion(path), queryString].filter(Boolean).join('?'),
+      [
+        path.startsWith('http') ? path : this.pathUsingVersion(path),
+        queryString,
+      ]
+        .filter(Boolean)
+        .join('?'),
       this.baseURL
     )
     return url.toString()
