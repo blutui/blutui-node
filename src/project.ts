@@ -2,53 +2,20 @@ import { Menus } from './resources/project'
 
 import type { Blutui } from './blutui'
 import { Admin } from './admin'
-import type { GetOptions, PostOptions } from './types'
+import { Request } from './request'
 
-export class Project {
+export class Project extends Request {
   readonly admin = new Admin(this, this.blutui)
   readonly menus = new Menus(this)
 
   constructor(
     public handle: string,
-    private readonly blutui: Blutui
-  ) {}
-
-  async get<Result>(path: string, options: GetOptions = {}) {
-    return await this.blutui.get<Result>(this.getProjectPath(path), options)
-  }
-
-  async post<Result, Entity>(
-    path: string,
-    entity: Entity,
-    options: PostOptions = {}
+    protected readonly blutui: Blutui
   ) {
-    return await this.blutui.post<Result, Entity>(
-      this.getProjectPath(path),
-      entity,
-      options
-    )
+    super(blutui)
   }
 
-  async patch<Result, Entity>(
-    path: string,
-    entity: Entity,
-    options: PostOptions = {}
-  ) {
-    return await this.blutui.patch<Result, Entity>(
-      this.getProjectPath(path),
-      entity,
-      options
-    )
-  }
-
-  async delete<Result>(path: string, options: PostOptions = {}) {
-    return await this.blutui.delete<Result>(this.getProjectPath(path), options)
-  }
-
-  /**
-   * Get the path for the current agency.
-   */
-  private getProjectPath(path: string): string {
+  protected getRequestPath(path: string): string {
     const newPath = path.startsWith('/') ? path.replace('/', '') : path
 
     return `https://${this.handle}.blutui.com/api/${newPath}`
