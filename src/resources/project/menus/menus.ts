@@ -1,15 +1,24 @@
 import type { Project } from '@/project'
-import type { Expandable, List, ListResponse, PaginationOptions } from '@/types'
+import type {
+  DeletedResponse,
+  Expandable,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
 import type {
   Menu,
   MenuResponse,
   CreateMenuOptions,
   SerializedCreateMenuOptions,
+  UpdateMenuOptions,
+  SerializedUpdateMenuOptions,
 } from './interfaces'
 import {
   deserializeMenu,
   deserializeMenuList,
   serializeCreateMenuOptions,
+  serializeUpdateMenuOptions,
 } from './serializers'
 import type { Admin } from '@/admin'
 
@@ -29,7 +38,7 @@ export class Menus {
   }
 
   /**
-   * Get a domain's information by ID.
+   * Get a menu's information by ID.
    */
   async get(id: string, options?: Expandable<'items'>): Promise<Menu> {
     const { data } = await this.project.get<MenuResponse>(`menus/${id}`, {
@@ -40,9 +49,9 @@ export class Menus {
   }
 
   /**
-   * Create a new brand for the current agency.
+   * Create a new menu for a project.
    *
-   * @param payload - The values to create the brand
+   * @param payload - The values to create the menu
    */
   async create(payload: CreateMenuOptions): Promise<Menu> {
     const { data } = await this.project.post<
@@ -53,26 +62,26 @@ export class Menus {
     return deserializeMenu(data)
   }
 
-  // /**
-  //  * Update the brand for the current agency.
-  //  *
-  //  * @param payload - The values to update the brand
-  //  */
-  // async update(payload: UpdateBrandOptions): Promise<BrandI> {
-  //   const { data } = await this.agency.patch<
-  //     BrandResponse,
-  //     SerializedUpdateBrandOptions
-  //   >('brand', serializeUpdateBrandOptions(payload))
+  /**
+   * Update the menu for the a project.
+   *
+   * @param payload - The values to update the menu
+   */
+  async update(id: string, payload: UpdateMenuOptions): Promise<Menu> {
+    const { data } = await this.project.patch<
+      MenuResponse,
+      SerializedUpdateMenuOptions
+    >(`menus/${id}`, serializeUpdateMenuOptions(payload))
 
-  //   return deserializeBrand(data)
-  // }
+    return deserializeMenu(data)
+  }
 
-  // /**
-  //  * Remove the brand for the current agency.
-  //  */
-  // async remove(): Promise<DeletedResponse> {
-  //   const { data } = await this.agency.delete<DeletedResponse>('brand')
+  /**
+   * Remove the menu for the current project.
+   */
+  async remove(id: string): Promise<DeletedResponse> {
+    const { data } = await this.project.delete<DeletedResponse>(`menus/${id}`)
 
-  //   return data
-  // }
+    return data
+  }
 }

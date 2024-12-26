@@ -110,4 +110,59 @@ describe('Menu', () => {
       })
     })
   })
+
+  describe('update', () => {
+    it('can update a menu', async () => {
+      fetchOnce(menuFixture)
+      const menu = await blutui
+        .project('foo')
+        .admin.menus.update(menuFixture.id, {
+          name: 'Primary Menu Updated',
+          handle: 'primary-menu-updated',
+        })
+
+      expect(fetchURL()).toBe(
+        `https://foo.blutui.com/admin/api/menus/${menuFixture.id}`
+      )
+      expect(menu).toMatchObject({
+        object: 'menu',
+      })
+    })
+
+    it('can update a menu with items', async () => {
+      fetchOnce(menuFixture)
+      const menu = await blutui
+        .project('foo')
+        .admin.menus.update(menuFixture.id, {
+          name: 'Primary Menu Updated',
+          handle: 'primary-menu-updated',
+          items: [
+            {
+              label: 'Contact',
+              url: '/contact',
+              is_new_tab: false,
+              active: true,
+            },
+          ],
+        })
+
+      expect(fetchURL()).toBe(
+        `https://foo.blutui.com/admin/api/menus/${menuFixture.id}`
+      )
+      expect(menu).toMatchObject({
+        object: 'menu',
+      })
+    })
+  })
+
+  describe('remove', () => {
+    it('can remove a menu', async () => {
+      fetchOnce(menuFixture)
+      await blutui.project('foo').admin.menus.remove(menuFixture.id)
+
+      expect(fetchURL()).toBe(
+        `https://foo.blutui.com/admin/api/menus/${menuFixture.id}`
+      )
+    })
+  })
 })
