@@ -2,7 +2,7 @@ import { Menus } from './resources/project'
 
 import type { Blutui } from './blutui'
 import { Admin } from './admin'
-import { Request } from './request'
+import { Request } from './utils/request'
 
 export class Project extends Request {
   readonly admin = new Admin(this, this.blutui)

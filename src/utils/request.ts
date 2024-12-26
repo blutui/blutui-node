@@ -1,5 +1,5 @@
-import type { Blutui } from './blutui'
-import type { GetOptions, PostOptions } from './types'
+import type { Blutui } from '../blutui'
+import type { GetOptions, PostOptions } from '../types'
 
 export class Request {
   constructor(protected readonly blutui: Blutui) {}

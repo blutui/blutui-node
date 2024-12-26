@@ -10,7 +10,7 @@ import {
 
 import type { Blutui } from './blutui'
 
-import { Request } from './request'
+import { Request } from './utils/request'
 
 export class Agency extends Request {
   readonly brand = new Brand(this)
