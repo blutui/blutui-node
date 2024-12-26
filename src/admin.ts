@@ -1,4 +1,4 @@
-import { Menus } from './resources/project'
+import { Menus } from './resources/project/admin'
 
 import type { Blutui } from './blutui'
 import type { GetOptions, PostOptions } from './types'

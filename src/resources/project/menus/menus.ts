@@ -1,25 +1,7 @@
 import type { Project } from '@/project'
-import type {
-  DeletedResponse,
-  Expandable,
-  List,
-  ListResponse,
-  PaginationOptions,
-} from '@/types'
-import type {
-  Menu,
-  MenuResponse,
-  CreateMenuOptions,
-  SerializedCreateMenuOptions,
-  UpdateMenuOptions,
-  SerializedUpdateMenuOptions,
-} from './interfaces'
-import {
-  deserializeMenu,
-  deserializeMenuList,
-  serializeCreateMenuOptions,
-  serializeUpdateMenuOptions,
-} from './serializers'
+import type { Expandable, List, ListResponse, PaginationOptions } from '@/types'
+import type { Menu, MenuResponse } from './interfaces'
+import { deserializeMenu, deserializeMenuList } from './serializers'
 import type { Admin } from '@/admin'
 
 export class Menus {
@@ -46,42 +28,5 @@ export class Menus {
     })
 
     return deserializeMenu(data)
-  }
-
-  /**
-   * Create a new menu for a project.
-   *
-   * @param payload - The values to create the menu
-   */
-  async create(payload: CreateMenuOptions): Promise<Menu> {
-    const { data } = await this.project.post<
-      MenuResponse,
-      SerializedCreateMenuOptions
-    >('menus', serializeCreateMenuOptions(payload))
-
-    return deserializeMenu(data)
-  }
-
-  /**
-   * Update the menu for the a project.
-   *
-   * @param payload - The values to update the menu
-   */
-  async update(id: string, payload: UpdateMenuOptions): Promise<Menu> {
-    const { data } = await this.project.patch<
-      MenuResponse,
-      SerializedUpdateMenuOptions
-    >(`menus/${id}`, serializeUpdateMenuOptions(payload))
-
-    return deserializeMenu(data)
-  }
-
-  /**
-   * Remove the menu for the current project.
-   */
-  async remove(id: string): Promise<DeletedResponse> {
-    const { data } = await this.project.delete<DeletedResponse>(`menus/${id}`)
-
-    return data
   }
 }
