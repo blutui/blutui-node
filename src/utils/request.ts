@@ -1,7 +1,7 @@
 import type { Blutui } from '../blutui'
 import type { GetOptions, PostOptions } from '../types'
 
-export class Request {
+export abstract class Request {
   constructor(protected readonly blutui: Blutui) {}
 
   async get<Result>(path: string, options: GetOptions = {}) {
@@ -37,9 +37,7 @@ export class Request {
   }
 
   /**
-   * Get the path for the current agency.
+   * Get the path for the current request.
    */
-  protected getRequestPath(path: string): string {
-    return path
-  }
+  protected abstract getRequestPath(path: string): string
 }
