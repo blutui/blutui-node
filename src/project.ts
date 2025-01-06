@@ -5,12 +5,12 @@ import { Admin } from './admin'
 import { Request } from './utils/request'
 
 export class Project extends Request {
-  readonly admin = new Admin(this, this.blutui)
+  readonly admin = new Admin(this)
   readonly menus = new Menus(this)
 
   constructor(
     public handle: string,
-    protected readonly blutui: Blutui
+    readonly blutui: Blutui
   ) {
     super(blutui)
   }
