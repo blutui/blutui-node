@@ -1,5 +1,7 @@
 import type {
+  CreateMenuItemOptions,
   CreateMenuOptions,
+  SerializedCreateMenuItemOptions,
   SerializedCreateMenuOptions,
 } from '../interfaces'
 
@@ -8,5 +10,21 @@ export const serializeCreateMenuOptions = (
 ): SerializedCreateMenuOptions => ({
   name: options.name,
   handle: options.handle,
-  items: options.items,
+  ...(options.items !== undefined && {
+    items: serializeCreateMenuItemOptions(options.items),
+  }),
 })
+
+export const serializeCreateMenuItemOptions = (
+  items: CreateMenuItemOptions[]
+): SerializedCreateMenuItemOptions[] => {
+  return items.map((item) => ({
+    label: item.label,
+    url: item.url,
+    is_new_tab: item.isNewTab,
+    active: item.active,
+    ...(item.items !== undefined && {
+      items: serializeCreateMenuItemOptions(item.items),
+    }),
+  }))
+}
