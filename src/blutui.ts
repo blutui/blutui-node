@@ -90,7 +90,7 @@ export class Blutui {
   /**
    * Get a Blutui Project instance for the given handle.
    *
-   * @param handle - The project's handle, if the handle is different as the project's subdomain, should pass the subdomain
+   * @param handle - The project's handle. If the project's handle is different from its subdomain, the subdomain should be used instead.
    */
   project(handle: string): Project {
     if (!this._projects[handle]) {
