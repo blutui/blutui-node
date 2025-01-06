@@ -13,7 +13,7 @@ export interface SerializedUpdateMenuOptions {
 export interface UpdateMenuItemOptions {
   label: string
   url: string
-  is_new_tab: boolean
+  isNewTab: boolean
   active: boolean
   items?: UpdateMenuItemOptions[]
 }

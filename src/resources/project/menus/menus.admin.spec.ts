@@ -89,7 +89,7 @@ describe('Menu', () => {
           {
             label: 'Contact',
             url: '/contact',
-            is_new_tab: false,
+            isNewTab: false,
             active: true,
           },
         ],
@@ -140,7 +140,7 @@ describe('Menu', () => {
             {
               label: 'Contact',
               url: '/contact',
-              is_new_tab: false,
+              isNewTab: false,
               active: true,
             },
           ],
