@@ -88,7 +88,7 @@ export class Blutui {
   }
 
   /**
-   * Get a Blutui Project instance for the given agency.
+   * Get a Blutui Project instance for the given handle.
    *
    * @param handle - The project's handle, if the handle is different as the project's subdomain, should pass the subdomain
    */
