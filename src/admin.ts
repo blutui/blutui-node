@@ -7,12 +7,11 @@ import { Request } from './utils/request'
 export class Admin extends Request {
   readonly menus = new Menus(this)
 
-  constructor(private readonly project: Project) {
-    super()
-  }
-
-  protected getBlutui(): Blutui {
-    return this.project.getBlutui()
+  constructor(
+    private readonly project: Project,
+    blutui: Blutui
+  ) {
+    super(blutui)
   }
 
   protected getRequestPath(path: string): string {

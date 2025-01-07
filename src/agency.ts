@@ -23,13 +23,9 @@ export class Agency extends Request {
 
   constructor(
     public username: string,
-    private readonly blutui: Blutui
+    blutui: Blutui
   ) {
-    super()
-  }
-
-  protected getBlutui(): Blutui {
-    return this.blutui
+    super(blutui)
   }
 
   protected getRequestPath(path: string): string {

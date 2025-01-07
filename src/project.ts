@@ -5,18 +5,15 @@ import { Admin } from './admin'
 import { Request } from './utils/request'
 
 export class Project extends Request {
-  readonly admin = new Admin(this)
+  readonly admin: Admin
   readonly menus = new Menus(this)
 
   constructor(
     public handle: string,
-    private readonly blutui: Blutui
+    blutui: Blutui
   ) {
-    super()
-  }
-
-  public getBlutui(): Blutui {
-    return this.blutui
+    super(blutui)
+    this.admin = new Admin(this, blutui)
   }
 
   protected getRequestPath(path: string): string {
