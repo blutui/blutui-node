@@ -10,9 +10,13 @@ export class Project extends Request {
 
   constructor(
     public handle: string,
-    readonly blutui: Blutui
+    private readonly blutui: Blutui
   ) {
-    super(blutui)
+    super()
+  }
+
+  public getBlutui(): Blutui {
+    return this.blutui
   }
 
   protected getRequestPath(path: string): string {

@@ -2,10 +2,11 @@ import type { Blutui } from '../blutui'
 import type { GetOptions, PostOptions } from '../types'
 
 export abstract class Request {
-  constructor(protected readonly blutui: Blutui) {}
-
   async get<Result>(path: string, options: GetOptions = {}) {
-    return await this.blutui.get<Result>(this.getRequestPath(path), options)
+    return await this.getBlutui().get<Result>(
+      this.getRequestPath(path),
+      options
+    )
   }
 
   async post<Result, Entity>(
@@ -13,7 +14,7 @@ export abstract class Request {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return await this.blutui.post<Result, Entity>(
+    return await this.getBlutui().post<Result, Entity>(
       this.getRequestPath(path),
       entity,
       options
@@ -25,7 +26,7 @@ export abstract class Request {
     entity: Entity,
     options: PostOptions = {}
   ) {
-    return await this.blutui.patch<Result, Entity>(
+    return await this.getBlutui().patch<Result, Entity>(
       this.getRequestPath(path),
       entity,
       options
@@ -33,11 +34,16 @@ export abstract class Request {
   }
 
   async delete<Result>(path: string, options: PostOptions = {}) {
-    return await this.blutui.delete<Result>(this.getRequestPath(path), options)
+    return await this.getBlutui().delete<Result>(
+      this.getRequestPath(path),
+      options
+    )
   }
 
   /**
    * Get the path for the current request.
    */
   protected abstract getRequestPath(path: string): string
+
+  protected abstract getBlutui(): Blutui
 }
