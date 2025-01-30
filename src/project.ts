@@ -1,4 +1,4 @@
-import { Menus } from './resources/project'
+import { Menus, Redirects } from './resources/project'
 
 import type { Blutui } from './blutui'
 import { Admin } from './admin'
@@ -7,6 +7,7 @@ import { Request } from './utils/request'
 export class Project extends Request {
   readonly admin: Admin
   readonly menus = new Menus(this)
+  readonly redirects = new Redirects(this)
 
   constructor(
     public handle: string,
