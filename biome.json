@@ -1,34 +1,46 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": { "enabled": true },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": false,
-    "useEditorconfig": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "arrowParentheses": "always",
-      "bracketSameLine": false,
-      "bracketSpacing": true,
-      "quoteProperties": "asNeeded",
-      "quoteStyle": "single",
-      "semicolons": "asNeeded",
-      "trailingCommas": "es5"
-    }
-  },
-  "overrides": [
-    {
-      "include": ["*.json"],
-      "formatter": {
-        "indentWidth": 2
-      }
-    }
-  ]
+	"$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"useEditorconfig": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"quoteProperties": "asNeeded",
+			"quoteStyle": "single",
+			"semicolons": "asNeeded",
+			"trailingCommas": "es5"
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.json"],
+			"formatter": {
+				"indentWidth": 2
+			}
+		}
+	]
 }
