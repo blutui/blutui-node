@@ -29,7 +29,7 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.0",
+    "@biomejs/biome": "2.1.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.13.11",
     "jest": "^30.0.0",
