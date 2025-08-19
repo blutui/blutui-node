@@ -1,12 +1,12 @@
 import fetch from 'jest-fetch-mock'
 import { Blutui } from '@/blutui'
 import { fetchOnce, fetchSearchParams, fetchURL } from '@/utils/testing'
-
-import projectFixture from './fixtures/project.json'
-import projectWithPrimaryDomainFixture from './fixtures/project-with-primary-domain.json'
-import projectListFixture from './fixtures/project-list.json'
-import domainListFixture from '../domains/fixtures/domain-list.json'
 import cassetteListFixture from '../cassettes/fixtures/cassette-list.json'
+import domainListFixture from '../domains/fixtures/domain-list.json'
+import projectFixture from './fixtures/project.json'
+import projectBrandFixture from './fixtures/project-brand.json'
+import projectListFixture from './fixtures/project-list.json'
+import projectWithPrimaryDomainFixture from './fixtures/project-with-primary-domain.json'
 
 const accessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
@@ -181,18 +181,17 @@ describe('Project', () => {
     })
   })
 
-  describe('domains', () => {
-    it('can retrieve a list of domains for a project', async () => {
-      fetchOnce(domainListFixture)
-      const domains = await blutui
-        .agency('foo')
-        .projects.domains(projectFixture.id)
+  describe('brand', () => {
+    it('can retrieve a brand for a project', async () => {
+      fetchOnce(projectBrandFixture)
+      const brand = await blutui.agency('foo').projects.brand(projectFixture.id)
 
       expect(fetchURL()).toBe(
-        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/domains`
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/brand`
       )
-      expect(domains).toMatchObject({
-        object: 'list',
+      expect(brand).toMatchObject({
+        object: 'project_brand',
+        primaryColor: '#ff2f0a',
       })
     })
   })
@@ -208,6 +207,22 @@ describe('Project', () => {
         `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/cassettes`
       )
       expect(cassettes).toMatchObject({
+        object: 'list',
+      })
+    })
+  })
+
+  describe('domains', () => {
+    it('can retrieve a list of domains for a project', async () => {
+      fetchOnce(domainListFixture)
+      const domains = await blutui
+        .agency('foo')
+        .projects.domains(projectFixture.id)
+
+      expect(fetchURL()).toBe(
+        `${blutui.baseURL}/v1/agencies/foo/projects/${projectFixture.id}/domains`
+      )
+      expect(domains).toMatchObject({
         object: 'list',
       })
     })

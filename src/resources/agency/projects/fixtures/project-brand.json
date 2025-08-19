@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "object": "project_brand",
+  "default_logo": "https://cdn.blutui.com/uploads/assets/logo/brand.svg",
+  "square_logo": "https://cdn.blutui.com/uploads/assets/logo/brand-square.svg",
+  "primary_color": "#ff2f0a",
+  "secondary_color": "#fff2ed",
+  "created_at": "2025-03-31T01:09:30+00:00",
+  "updated_at": "2025-04-01T01:26:12+00:00"
+}

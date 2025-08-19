@@ -1,16 +1,4 @@
-import {
-  deserializeInvite,
-  deserializeInviteList,
-  serializeUpdateInviteOptions,
-} from './serializers'
-
 import type { Agency } from '@/agency'
-import type {
-  Invite,
-  InviteResponse,
-  SerializedUpdateInviteOptions,
-  UpdateInviteOptions,
-} from './interfaces'
 import type {
   DeletedResponse,
   Expandable,
@@ -18,6 +6,17 @@ import type {
   ListResponse,
   PaginationOptions,
 } from '@/types'
+import type {
+  Invite,
+  InviteResponse,
+  SerializedUpdateInviteOptions,
+  UpdateInviteOptions,
+} from './interfaces'
+import {
+  deserializeInvite,
+  deserializeInviteList,
+  serializeUpdateInviteOptions,
+} from './serializers'
 
 export class Invites {
   constructor(private readonly agency: Agency) {}

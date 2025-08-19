@@ -12,6 +12,8 @@
       "timezone": "UTC",
       "subdomain": "one",
       "primary_domain": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
+      "cassette": "9d4b361e-4c00-4ac8-be51-fa76a5040c2a",
+      "brand": 1,
       "published": true,
       "processed": true,
       "created_at": 1720758022,

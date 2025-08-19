@@ -1,11 +1,10 @@
-import {
-  deserializeRole,
-  deserializeRoleList,
-  serializeCreateRoleOptions,
-  serializeUpdateRoleOptions,
-} from './serializers'
-
 import type { Agency } from '@/agency'
+import type {
+  DeletedResponse,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
 import type {
   CreateRoleOptions,
   Role,
@@ -14,12 +13,12 @@ import type {
   SerializedUpdateRoleOptions,
   UpdateRoleOptions,
 } from './interfaces'
-import type {
-  DeletedResponse,
-  List,
-  ListResponse,
-  PaginationOptions,
-} from '@/types'
+import {
+  deserializeRole,
+  deserializeRoleList,
+  serializeCreateRoleOptions,
+  serializeUpdateRoleOptions,
+} from './serializers'
 
 export class Roles {
   constructor(private readonly agency: Agency) {}

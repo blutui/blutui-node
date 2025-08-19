@@ -1,8 +1,9 @@
 import type { List, ListResponse } from '@/types'
 import { deserializePaginationMeta } from '@/utils/serializers'
-import { deserializeBrand } from '../../brand/serializers'
+import { deserializeCassette } from '../../cassettes/serializers'
 import { deserializeDomain } from '../../domains/serializers'
 import type { Project, ProjectResponse } from '../interfaces'
+import { deserializeProjectBrand } from './project-brand.serializer'
 
 export const deserializeProject = (project: ProjectResponse): Project => ({
   id: project.id,
@@ -18,9 +19,13 @@ export const deserializeProject = (project: ProjectResponse): Project => ({
     project.primary_domain instanceof Object
       ? deserializeDomain(project.primary_domain)
       : project.primary_domain,
+  cassette:
+    project.cassette instanceof Object
+      ? deserializeCassette(project.cassette)
+      : project.cassette,
   brand:
     project.brand instanceof Object
-      ? deserializeBrand(project.brand)
+      ? deserializeProjectBrand(project.brand)
       : project.brand,
   published: project.published,
   processed: project.processed,
