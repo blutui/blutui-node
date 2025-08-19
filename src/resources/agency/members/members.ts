@@ -1,22 +1,21 @@
-import {
-  deserializeMember,
-  deserializeMemberList,
-  serializeUpdateMemberOptions,
-} from './serializers'
-
 import type { Agency } from '@/agency'
-import type {
-  Member,
-  MemberResponse,
-  SerializedUpdateMemberOptions,
-  UpdateMemberOptions,
-} from './interfaces'
 import type {
   DeletedResponse,
   List,
   ListResponse,
   PaginationOptions,
 } from '@/types'
+import type {
+  Member,
+  MemberResponse,
+  SerializedUpdateMemberOptions,
+  UpdateMemberOptions,
+} from './interfaces'
+import {
+  deserializeMember,
+  deserializeMemberList,
+  serializeUpdateMemberOptions,
+} from './serializers'
 
 export class Members {
   constructor(private readonly agency: Agency) {}

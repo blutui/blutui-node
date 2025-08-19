@@ -13,6 +13,8 @@ import { deserializeDomainList } from '../domains/serializers'
 import type {
   CreateProjectOptions,
   Project,
+  ProjectBrand,
+  ProjectBrandResponse,
   ProjectResponse,
   SearchProjectOptions,
   SerializedCreateProjectOptions,
@@ -22,6 +24,7 @@ import type {
 } from './interfaces'
 import {
   deserializeProject,
+  deserializeProjectBrand,
   deserializeProjectList,
   serializeCreateProjectOptions,
   serializeUpdateProjectOptions,
@@ -116,18 +119,14 @@ export class Projects {
   }
 
   /**
-   * Retrieve the domains for a project in your agency.
+   * Retrieve the brand for a project in your agency.
    */
-  async domains(
-    id: string,
-    options?: PaginationOptions
-  ): Promise<List<Domain>> {
-    const { data } = await this.agency.get<ListResponse<DomainResponse>>(
-      `projects/${id}/domains`,
-      { query: options }
+  async brand(id: string): Promise<ProjectBrand> {
+    const { data } = await this.agency.get<ProjectBrandResponse>(
+      `projects/${id}/brand`
     )
 
-    return deserializeDomainList(data)
+    return deserializeProjectBrand(data)
   }
 
   /**
@@ -143,6 +142,21 @@ export class Projects {
     )
 
     return deserializeCassetteList(data)
+  }
+
+  /**
+   * Retrieve the domains for a project in your agency.
+   */
+  async domains(
+    id: string,
+    options?: PaginationOptions
+  ): Promise<List<Domain>> {
+    const { data } = await this.agency.get<ListResponse<DomainResponse>>(
+      `projects/${id}/domains`,
+      { query: options }
+    )
+
+    return deserializeDomainList(data)
   }
 
   /**
@@ -178,6 +192,8 @@ export class Projects {
 
   /**
    * Republish a project with the given ID.
+   *
+   * @deprecated
    */
   async republish(id: string): Promise<Project> {
     const { data } = await this.agency.post<

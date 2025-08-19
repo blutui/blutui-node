@@ -1,16 +1,15 @@
-import { deserializeBrand, serializeCreateBrandOptions } from './serializers'
-import { serializeUpdateBrandOptions } from './serializers/update-brand-options.serializer'
-
 import type { Agency } from '@/agency'
+import type { DeletedResponse } from '@/types'
 import type {
+  Brand as BrandI,
   BrandResponse,
   CreateBrandOptions,
   SerializedCreateBrandOptions,
   SerializedUpdateBrandOptions,
   UpdateBrandOptions,
-  Brand as BrandI,
 } from './interfaces'
-import type { DeletedResponse } from '@/types'
+import { deserializeBrand, serializeCreateBrandOptions } from './serializers'
+import { serializeUpdateBrandOptions } from './serializers/update-brand-options.serializer'
 
 export class Brand {
   constructor(private readonly agency: Agency) {}

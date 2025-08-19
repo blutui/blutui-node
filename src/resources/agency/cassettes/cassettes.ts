@@ -1,22 +1,21 @@
+import type { Agency } from '@/agency'
+import type { DeletedResponse, Expandable } from '@/types'
+import type {
+  Cassette,
+  CassetteResponse,
+  CreateCassetteOptions,
+  DuplicateCassetteOptions,
+  SerializedCreateCassetteOptions,
+  SerializedDuplicateCassetteOptions,
+  SerializedUpdateCassetteOptions,
+  UpdateCassetteOptions,
+} from './interfaces'
 import {
   deserializeCassette,
   serializeCreateCassetteOptions,
   serializeDuplicateCassetteOptions,
   serializeUpdateCassetteOptions,
 } from './serializers'
-
-import type { Agency } from '@/agency'
-import type {
-  CassetteResponse,
-  Cassette,
-  CreateCassetteOptions,
-  SerializedCreateCassetteOptions,
-  UpdateCassetteOptions,
-  SerializedUpdateCassetteOptions,
-  DuplicateCassetteOptions,
-  SerializedDuplicateCassetteOptions,
-} from './interfaces'
-import type { DeletedResponse, Expandable } from '@/types'
 
 export class Cassettes {
   constructor(private readonly agency: Agency) {}

@@ -3,8 +3,8 @@ import { Blutui } from '@/blutui'
 import { fetchOnce, fetchURL } from '@/utils/testing'
 
 import domainFixture from './fixtures/domain.json'
-import domainWithProjectFixture from './fixtures/domain-with-project.json'
 import domainListFixture from './fixtures/domain-list.json'
+import domainWithProjectFixture from './fixtures/domain-with-project.json'
 
 const accessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'

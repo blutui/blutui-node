@@ -1,10 +1,9 @@
 import fetch from 'jest-fetch-mock'
 import { Blutui } from '@/blutui'
+import { ValidationException } from '@/exceptions'
 import { fetchOnce, fetchURL } from '@/utils/testing'
-
 import memberFixture from './fixtures/member.json'
 import memberListFixture from './fixtures/member-list.json'
-import { ValidationException } from '@/exceptions'
 
 const accessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'

@@ -1,22 +1,4 @@
-import {
-  deserializeDomain,
-  deserializeDomainList,
-  serializeCreateDomainOptions,
-  serializeUpdateDomainOptions,
-} from './serializers'
-
 import type { Agency } from '@/agency'
-import type {
-  CreateDomainOptions,
-  DomainResponse,
-  DomainVerifyResponse,
-  SearchDomainOptions,
-  SerializedCreateDomainOptions,
-  SerializedSearchDomainOptions,
-  SerializedUpdateDomainOptions,
-  UpdateDomainOptions,
-  Domain,
-} from './interfaces'
 import type {
   DeletedResponse,
   Expandable,
@@ -24,6 +6,23 @@ import type {
   ListResponse,
   PaginationOptions,
 } from '@/types'
+import type {
+  CreateDomainOptions,
+  Domain,
+  DomainResponse,
+  DomainVerifyResponse,
+  SearchDomainOptions,
+  SerializedCreateDomainOptions,
+  SerializedSearchDomainOptions,
+  SerializedUpdateDomainOptions,
+  UpdateDomainOptions,
+} from './interfaces'
+import {
+  deserializeDomain,
+  deserializeDomainList,
+  serializeCreateDomainOptions,
+  serializeUpdateDomainOptions,
+} from './serializers'
 
 export class Domains {
   constructor(private readonly agency: Agency) {}
