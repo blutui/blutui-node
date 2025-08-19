@@ -22,7 +22,7 @@ import type {
   PostOptions,
 } from './types'
 
-const VERSION = '0.9.0'
+const VERSION = '0.10.0'
 
 const DEFAULT_HOSTNAME = 'api.blutui.com'
 
