@@ -2,17 +2,19 @@
   "id": "9bfdb42b-1bf0-4510-978e-46aa329f8efa",
   "object": "menu",
   "name": "Primary Menu",
-  "items": [{
-    "id": "99bc147e-966c-4dd0-8def-de817c63cf41",
-    "object": "menu_item",
-    "label": "Contact",
-    "url": "/contact",
-    "active": true,
-    "is_new_tab": false,
-    "order": 1,
-    "created_at": 1720758022,
-    "updated_at": 1720758046
-  }],
+  "items": [
+    {
+      "id": "99bc147e-966c-4dd0-8def-de817c63cf41",
+      "object": "menu_item",
+      "label": "Contact",
+      "url": "/contact",
+      "active": true,
+      "is_new_tab": false,
+      "order": 1,
+      "created_at": 1720758022,
+      "updated_at": 1720758046
+    }
+  ],
   "created_at": 1716170007,
   "updated_at": 1716170007
 }

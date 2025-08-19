@@ -1,12 +1,15 @@
-import {
-  deserializeProject,
-  deserializeProjectList,
-  serializeCreateProjectOptions,
-  serializeUpdateProjectOptions,
-} from './serializers'
-import { deserializeDomainList } from '../domains/serializers'
-
 import type { Agency } from '@/agency'
+import type {
+  DeletedResponse,
+  Expandable,
+  List,
+  ListResponse,
+  PaginationOptions,
+} from '@/types'
+import type { Cassette, CassetteResponse } from '../cassettes/interfaces'
+import { deserializeCassetteList } from '../cassettes/serializers'
+import type { Domain, DomainResponse } from '../domains/interfaces'
+import { deserializeDomainList } from '../domains/serializers'
 import type {
   CreateProjectOptions,
   Project,
@@ -17,16 +20,14 @@ import type {
   SerializedUpdateProjectOptions,
   UpdateProjectOptions,
 } from './interfaces'
-import type { Domain, DomainResponse } from '../domains/interfaces'
-import type { Cassette, CassetteResponse } from '../cassettes/interfaces'
-import type {
-  DeletedResponse,
-  Expandable,
-  List,
-  ListResponse,
-  PaginationOptions,
-} from '@/types'
-import { deserializeCassetteList } from '../cassettes/serializers'
+import {
+  deserializeProject,
+  deserializeProjectList,
+  serializeCreateProjectOptions,
+  serializeUpdateProjectOptions,
+} from './serializers'
+
+export type ProjectExpandable = Expandable<'primary_domain' | 'brand'>
 
 export class Projects {
   constructor(private readonly agency: Agency) {}
@@ -35,7 +36,7 @@ export class Projects {
    * Get the projects list for the current agency.
    */
   async list(
-    options?: PaginationOptions & Expandable<'primary_domain'>
+    options?: PaginationOptions & ProjectExpandable
   ): Promise<List<Project>> {
     const { data } = await this.agency.get<ListResponse<ProjectResponse>>(
       'projects',
@@ -50,10 +51,7 @@ export class Projects {
   /**
    * Get a project's information by ID.
    */
-  async get(
-    id: string,
-    options?: Expandable<'primary_domain'>
-  ): Promise<Project> {
+  async get(id: string, options?: ProjectExpandable): Promise<Project> {
     const { data } = await this.agency.get<ProjectResponse>(`projects/${id}`, {
       query: options,
     })
@@ -152,7 +150,7 @@ export class Projects {
    */
   async search(
     payload: SearchProjectOptions,
-    options?: PaginationOptions & Expandable<'primary_domain'>
+    options?: PaginationOptions & ProjectExpandable
   ): Promise<List<Project>> {
     const { data } = await this.agency.post<
       ListResponse<ProjectResponse>,

@@ -41,9 +41,12 @@ export class Redirects {
    * Get a redirect's information by ID.
    */
   async get(id: string, options?: Expandable<'items'>): Promise<Redirect> {
-    const { data } = await this.project.get<RedirectResponse>(`redirects/${id}`, {
-      query: options,
-    })
+    const { data } = await this.project.get<RedirectResponse>(
+      `redirects/${id}`,
+      {
+        query: options,
+      }
+    )
 
     return deserializeRedirect(data)
   }
@@ -80,7 +83,9 @@ export class Redirects {
    * Remove the redirect for the current project.
    */
   async remove(id: string): Promise<DeletedResponse> {
-    const { data } = await this.project.delete<DeletedResponse>(`redirects/${id}`)
+    const { data } = await this.project.delete<DeletedResponse>(
+      `redirects/${id}`
+    )
 
     return data
   }
