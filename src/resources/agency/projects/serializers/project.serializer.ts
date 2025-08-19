@@ -1,8 +1,8 @@
-import { deserializePaginationMeta } from '@/utils/serializers'
-import { deserializeDomain } from '../../domains/serializers'
-
-import type { Project, ProjectResponse } from '../interfaces'
 import type { List, ListResponse } from '@/types'
+import { deserializePaginationMeta } from '@/utils/serializers'
+import { deserializeBrand } from '../../brand/serializers'
+import { deserializeDomain } from '../../domains/serializers'
+import type { Project, ProjectResponse } from '../interfaces'
 
 export const deserializeProject = (project: ProjectResponse): Project => ({
   id: project.id,
@@ -18,6 +18,10 @@ export const deserializeProject = (project: ProjectResponse): Project => ({
     project.primary_domain instanceof Object
       ? deserializeDomain(project.primary_domain)
       : project.primary_domain,
+  brand:
+    project.brand instanceof Object
+      ? deserializeBrand(project.brand)
+      : project.brand,
   published: project.published,
   processed: project.processed,
   createdAt: project.created_at,

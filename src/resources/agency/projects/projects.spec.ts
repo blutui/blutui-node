@@ -41,6 +41,20 @@ describe('Project', () => {
         object: 'list',
       })
     })
+
+    it('can retrieve a list of projects with an expandable brand', async () => {
+      fetchOnce(projectListFixture)
+      const projects = await blutui
+        .agency('foo')
+        .projects.list({ expand: ['brand'] })
+
+      expect(fetchURL()).toBe(
+        encodeURI(`${blutui.baseURL}/v1/agencies/foo/projects?expand[]=brand`)
+      )
+      expect(projects).toMatchObject({
+        object: 'list',
+      })
+    })
   })
 
   describe('get', () => {
